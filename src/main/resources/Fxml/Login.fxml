@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="login_container" stylesheets="@../styles/login.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafxapp.Controllers.LoginController">
+   <children>
+      <VBox layoutX="-8.0" prefHeight="400.0" prefWidth="211.0" styleClass="login_logo_container" stylesheets="@../styles/login.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-8.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <FontAwesomeIconView glyphName="BANK" size="50" wrappingWidth="50.000057220458984" />
+            <Text fill="#d9d0d0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bank">
+               <font>
+                  <Font size="39.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+      <VBox layoutX="238.0" layoutY="14.0" prefHeight="363.0" prefWidth="367.0" styleClass="login_form_container" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <Label id="choice-prompt-text" text="Choose Your Account Type" />
+            <ChoiceBox fx:id="acc_selector" prefWidth="150.0" styleClass="account_selector" />
+            <Label fx:id="payee_adress_lbl" text="Username :" />
+            <TextField fx:id="payee_adress_fill" styleClass="input_field" />
+            <Label prefHeight="17.0" prefWidth="82.0" text="Password:" />
+            <TextField fx:id="password_fill" styleClass="input_field" />
+            <Button fx:id="login_btn" mnemonicParsing="false" prefHeight="31.0" prefWidth="104.0" text="LogIn" />
+            <Label fx:id="error_lbl" prefHeight="17.0" prefWidth="57.0" styleClass="error_lbl" text="Error" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
