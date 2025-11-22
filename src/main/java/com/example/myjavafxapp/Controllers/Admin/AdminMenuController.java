@@ -1,5 +1,7 @@
 package com.example.myjavafxapp.Controllers.Admin;
 
+import com.example.myjavafxapp.Models.Model;
+import com.example.myjavafxapp.Views.AdminMenuOptions;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import java.net.URL;
@@ -13,6 +15,10 @@ public class AdminMenuController implements Initializable {
     public Button logout_btn;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        addlisteners();
+    }
+    private void addlisteners(){}
+    private void onCreateClient(){
+        Model.getInstance.getViewFactory().getClientSelectedMenuItem().set(AdminMenuOptions.CREATE_CLIENTS);
     }
 }
