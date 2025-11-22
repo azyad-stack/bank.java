@@ -1,6 +1,8 @@
 .main_menu_container{
     -fx-background-color: #EEEEEE;
     -fx-background-radius: 10;
+    -fx-alignment: center;
+    -fx-padding: 0 10 0 10;
 
 }
 .left_container{
@@ -12,7 +14,7 @@
 .title_container{
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 20 20 0 0;
-    -fx-alignement: 10;
+    -fx-alignment: center;
     -fx-padding: 10;
 }
 .title_container FontAwesomeIconView{
