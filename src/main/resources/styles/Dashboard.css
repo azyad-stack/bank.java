@@ -1,0 +1,257 @@
+/* ---------------------------------------------------
+   GLOBAL / DASHBOARD
+---------------------------------------------------- */
+
+.dashboard {
+    -fx-background-color: linear-gradient(to bottom right, #0f172a, #1e293b);
+}
+
+/* ---------------------------------------------------
+   HEADER
+---------------------------------------------------- */
+
+.user_name {
+    -fx-font-size: 2.6em;
+    -fx-font-family: "Segoe UI", "Arial";
+    -fx-font-weight: bold;
+    -fx-fill: #f8fafc;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 12, 0.15, 0, 3);
+}
+
+.date_label {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 1.1em;
+    -fx-font-family: "Segoe UI", "Arial";
+}
+
+.section_title {
+    -fx-font-size: 1.4em;
+    -fx-font-family: "Segoe UI", "Arial";
+    -fx-font-weight: bold;
+    -fx-fill: #e2e8f0;
+}
+
+/* ---------------------------------------------------
+   ACCOUNT VIEW SIDEBAR
+---------------------------------------------------- */
+
+.account_view {
+    -fx-background-color: rgba(30, 41, 59, 0.65);
+    -fx-background-radius: 18 0 0 18;
+    -fx-padding: 15;
+    -fx-alignment: center;
+    -fx-border-width: 0 1.5 0 0;
+    -fx-border-color: rgba(148,163,184,0.25);
+    -fx-spacing: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 20, 0, 0, 8);
+}
+
+/* ---------------------------------------------------
+   ACCOUNT CARDS
+---------------------------------------------------- */
+
+.account {
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: rgba(255,255,255,0.13);
+    -fx-border-width: 1.2;
+    -fx-effect: dropshadow(gaussian, rgba(6,182,212,0.35), 35, 0.2, 0, 10);
+}
+
+.account_VBox {
+    -fx-background-color: transparent;
+}
+
+.account_text {
+    -fx-fill: rgba(255,255,255,0.92);
+    -fx-font-size: 1.35em;
+    -fx-font-weight: 600;
+    -fx-font-family: "Segoe UI", "Arial";
+}
+
+.account_FontAwesomeIconView {
+    -fx-fill: rgba(255,255,255,0.35);
+}
+
+.account_gradient {
+    -fx-background-color: linear-gradient(135deg, #0891b2, #2563eb);
+}
+
+.account_balance {
+    -fx-text-fill: #fff;
+    -fx-font-size: 2.8em;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
+}
+
+.account_number {
+    -fx-text-fill: rgba(255,255,255,0.85);
+    -fx-font-size: 1.3em;
+    -fx-font-family: "Segoe UI", "Arial";
+}
+
+/* ---------------------------------------------------
+   SUMMARY VIEW
+---------------------------------------------------- */
+
+.summary_view {
+    -fx-background-color: rgba(30,41,59,0.65);
+    -fx-background-radius: 18;
+    -fx-padding: 10 14;
+}
+
+.acc_summary_container {
+    -fx-padding: 22 18;
+    -fx-spacing: 12;
+    -fx-alignment: center_left;
+    -fx-background-radius: 20;
+    -fx-background-color: rgba(30,41,59,0.8);
+    -fx-border-radius: 20;
+    -fx-border-color: rgba(148,163,184,0.35);
+    -fx-border-width: 1.6;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.30), 20, 0.1, 0, 10);
+}
+
+.acc_summary_container Line {
+    -fx-stroke: rgba(148,163,184,0.3);
+    -fx-stroke-width: 2;
+}
+
+.income_amount {
+    -fx-text-fill: #10b981;
+    -fx-font-size: 1.6em;
+    -fx-font-weight: bold;
+}
+
+.expense_amount {
+    -fx-text-fill: #f43f5e;
+    -fx-font-size: 1.6em;
+    -fx-font-weight: bold;
+}
+
+/* ---------------------------------------------------
+   TRANSACTIONS LISTVIEW
+---------------------------------------------------- */
+
+.Transaction_listview {
+    -fx-background-color: rgba(30,41,59,0.7);
+    -fx-background-radius: 18;
+    -fx-border-radius: 18;
+    -fx-border-width: 1.5;
+    -fx-border-color: rgba(148,163,184,0.25);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 20, 0, 0, 8);
+}
+
+.Transaction_listview .scroll-bar {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8;
+}
+
+.Transaction_listview .scroll-bar .track {
+    -fx-background-color: rgba(30,41,59,0.35);
+    -fx-background-radius: 4;
+}
+
+.Transaction_listview .scroll-bar .thumb {
+    -fx-background-color: rgba(6,182,212,0.55);
+    -fx-background-radius: 4;
+}
+
+.Transaction_listview .scroll-bar .thumb:hover {
+    -fx-background-color: rgba(6,182,212,0.85);
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 15 20;
+    -fx-text-fill: #e2e8f0;
+    -fx-border-color: rgba(148,163,184,0.15);
+    -fx-border-width: 0 0 1 0;
+}
+
+.list-cell:hover {
+    -fx-background-color: rgba(6,182,212,0.10);
+    -fx-cursor: hand;
+}
+
+.list-cell:selected {
+    -fx-background-color: rgba(6,182,212,0.25);
+}
+
+/* ---------------------------------------------------
+   SEND MONEY SECTION
+---------------------------------------------------- */
+
+.new_trans_container {
+    -fx-background-color: rgba(30,41,59,0.8);
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-padding: 25 22;
+    -fx-border-width: 1.6;
+    -fx-border-color: rgba(148,163,184,0.35);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 25, 0.15, 0, 10);
+}
+
+.new_trans_container Label {
+    -fx-font-family: "Segoe UI", "Arial";
+    -fx-font-size: 1.2em;
+    -fx-font-weight: 600;
+    -fx-text-fill: #cbd5e1;
+}
+
+.new_trans_container TextField,
+.new_trans_container TextArea {
+    -fx-background-color: rgba(15,23,42,0.7);
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: rgba(148,163,184,0.35);
+    -fx-border-width: 1.5;
+    -fx-text-fill: #f1f5f9;
+    -fx-prompt-text-fill: #64748b;
+    -fx-font-size: 1.1em;
+}
+
+.new_trans_container TextField {
+    -fx-pref-height: 45;
+    -fx-padding: 0 15;
+}
+
+.new_trans_container TextArea {
+    -fx-padding: 10 15;
+}
+
+.new_trans_container TextField:focused,
+.new_trans_container TextArea:focused {
+    -fx-border-color: #06b6d4;
+    -fx-border-width: 2;
+    -fx-background-color: rgba(15,23,42,0.9);
+    -fx-effect: dropshadow(gaussian, rgba(6,182,212,0.45), 15, 0, 0, 0);
+}
+
+.new_trans_container Button {
+    -fx-background-color: linear-gradient(135deg, #06b6d4, #2563eb);
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+    -fx-border-color: rgba(6,182,212,0.55);
+    -fx-border-width: 1;
+    -fx-pref-width: 230;
+    -fx-pref-height: 48;
+    -fx-font-family: "Segoe UI", "Arial";
+    -fx-font-size: 1.35em;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(6,182,212,0.55), 20, 0.2, 0, 8);
+}
+
+.new_trans_container Button:hover {
+    -fx-background-color: linear-gradient(135deg, #0891b2, #1d4ed8);
+    -fx-cursor: hand;
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+.new_trans_container Button:pressed {
+    -fx-scale-x: 0.97;
+    -fx-scale-y: 0.97;
+    -fx-background-color: linear-gradient(135deg, #0e7490, #1e40af);
+}
