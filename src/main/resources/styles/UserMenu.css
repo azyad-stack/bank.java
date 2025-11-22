@@ -1,18 +1,18 @@
 .main_menu_container{
     -fx-background-color: #EEEEEE;
-    -fx-background-radius: 10;
+    -fx-background-radius: center;
 
 }
 .left_container{
     -fx-background-color: #FFFFFF;
-    -fx-background-radius: 10%;
+    -fx-background-radius: 10;
     -fx-effect : dropshadow(two-pass-box,#AAAAAA,5,0,0,4);
 }
 /* Title/logo Section */
 .title_container{
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 20 20 0 0;
-    -fx-alignement: 10;
+    -fx-alignment: top_center;
     -fx-padding: 10;
 }
 .title_container FontAwesomeIconView{
@@ -33,8 +33,8 @@
     -fx-background-color: #FFFFFF;
     -fx-text-fill: #0F2A45 ;
     -fx-font-size: 1.1em;
-    -fx-align: 10;
-    -fx-effect: dropshadow(two-pass-box,#DDDDDD,5,0,0,6);
+    -fx-align: center_left;
+    -fx-effect: dropshadow(three-pass-box,#DDDDDD,5,0,0,6);
 }
 .menu_container button:hover{
     -fx-cursor :hand;
