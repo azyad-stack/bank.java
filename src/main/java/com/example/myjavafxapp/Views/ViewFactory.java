@@ -9,66 +9,86 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class ViewFactory {
-   // Admin Views
+    private AccountType loginAccountType;
     private final ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
     private AnchorPane createClientView;
+
     public ViewFactory() {
+        this.loginAccountType = AccountType.CLIENT;
         this.adminSelectedMenuItem = new SimpleObjectProperty<>();
     }
-    /*
-    * Admin views Section
-    * */
+
+    public AccountType getLoginAccountType() {
+        return loginAccountType;
+    }
+
+    public void setLoginAccountType(AccountType loginAccountType) {
+        this.loginAccountType = loginAccountType;
+    }
+
+    // --- LOGIN VIEW ---
+    private FXMLLoader loadLoginView() {
+        return loadFXML("/Fxml/Login.fxml");
+    }
+
+    public void showLoginWindow() {
+        createStage(loadLoginView(), "Login");
+    }
+
+    // --- CLIENT DASHBOARD ---
+    private FXMLLoader loadClientDashboardView() {
+        return loadFXML("/Fxml/User/Dashboard.fxml");
+    }
+
+    public void showClientWindow() {
+        createStage(loadClientDashboardView(), "Client Dashboard");
+    }
+
+    // --- ADMIN VIEWS SECTION ---
     public ObjectProperty<AdminMenuOptions> getAdminSelectedMenuItem() {
         return adminSelectedMenuItem;
     }
-    private AnchorPane getCreateClientView() {
+
+    public AnchorPane getCreateClientView() {
         if (createClientView == null) {
             try {
                 createClientView = new FXMLLoader(getClass().getResource("/Fxml/Admin/CreateClient.fxml")).load();
-            }catch (Exception e){
+            } catch (Exception e){
                 e.printStackTrace();
             }
         }
         return createClientView;
-
-    }
-   public void showAdminWindow(){
-       try {
-           FXMLLoader loader = new FXMLLoader(getClass().getResource("Admin.fxml"));
-           AdminController controller = new AdminController();
-           loader.setController(controller);
-           createStage(loader);
-       }
-   }
-
-    private void createStage(FXMLLoader loader) {
-       Scene scene = null;
-       try {
-           scene = new Scene(loader.load());
-       }catch (Exception e){
-           e.printStackTrace();
-       }
-       Stage stage = new Stage();
-       stage.setScene(scene);
-       stage.setTitle("JBANK");
-       stage.show();
-    }
-    public void closeStage(Stage stage){
-       stage.close();
     }
 
+    public void showAdminWindow() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Admin/Admin.fxml"));
+        AdminController controller = new AdminController();
+        loader.setController(controller);
+        createStage(loader, "Admin");
+    }
 
-    public void showLoginWindow() {
-        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
-        Scene scene = null;
+    private FXMLLoader loadFXML(String resourcePath) {
+        return new FXMLLoader(getClass().getResource(resourcePath));
+    }
+
+    private void createStage(FXMLLoader loader, String title) {
+        Scene scene;
         try {
-            scene = new Scene(Loader.load());
-        }catch (Exception e) {
+            scene = new Scene(loader.load());
+        } catch (Exception e){
             e.printStackTrace();
+            return;
         }
+
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.setTitle("JBANK");
+        stage.setTitle(title);
         stage.show();
+    }
+
+    public void closeStage(Stage stage) {
+        if (stage != null) {
+            stage.close();
+        }
     }
 }

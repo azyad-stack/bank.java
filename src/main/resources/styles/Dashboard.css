@@ -196,7 +196,7 @@
     -fx-font-family: "Segoe UI", "Arial";
     -fx-font-size: 1.2em;
     -fx-font-weight: 600;
-    -fx-text-fill: #cbd5e1;
+    -fx-text-fill: rgba(15,23,42,0.7);;
 }
 
 .new_trans_container TextField,

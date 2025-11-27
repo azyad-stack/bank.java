@@ -1,6 +1,6 @@
 package com.example.myjavafxapp.Views;
 
 public enum AccountType {
-     ADMIN,
+    ADMIN,
     CLIENT
 }
