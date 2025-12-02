@@ -1,5 +1,7 @@
 package com.example.myjavafxapp.Controllers.User;
 
+import com.example.myjavafxapp.Models.Model;
+import com.example.myjavafxapp.Views.UserMenuOptions;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
@@ -16,5 +18,25 @@ public class UserMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        addListeners();
+    }
+
+    private void addListeners() {
+        dashboard_btn.setOnAction(e -> onDashboard());
+        transactions_btn.setOnAction(event -> onTransactions());
+        accounts_btn.setOnAction(event -> onAccounts());
+    }
+
+    private void onAccounts() {
+        Model.getInstance().getViewFactory().getUserSelectedMenuItemProperty().set(UserMenuOptions.ACCOUNTS);
+    }
+
+    private void onTransactions() {
+        Model.getInstance().getViewFactory().getUserSelectedMenuItemProperty().set(UserMenuOptions.TRANSACTIONS);
+    }
+
+    private void onDashboard() {
+        Model.getInstance().getViewFactory().getUserSelectedMenuItemProperty().set(UserMenuOptions.DASHBOARD);
+
     }
 }

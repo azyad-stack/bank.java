@@ -5,7 +5,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class CreateClienController {
+public class CreateUserController {
     public TextField fName_fld;
     public TextField lName_fld;
     public TextField password_fld;
@@ -17,4 +17,5 @@ public class CreateClienController {
     public TextField sv_amount_fld;
     public Button create_client_btn;
     public Label error_lbl;
+
 }

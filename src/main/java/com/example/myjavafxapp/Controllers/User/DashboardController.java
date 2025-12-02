@@ -1,6 +1,7 @@
 package com.example.myjavafxapp.Controllers.User;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -8,7 +9,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-public class DashboardController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class DashboardController implements Initializable {
 
     public Text user_name;
     public Label date_label;
@@ -24,4 +28,8 @@ public class DashboardController {
     public TextArea message_field;
     public Button send_money_btn;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }

@@ -15,7 +15,7 @@ public final class Model {
         this.viewFactory = new ViewFactory();
     }
 
-    public static Model getInstance() {
+    public static synchronized Model getInstance() {
         if (instance == null) {
             synchronized (Model.class) {
                 if (instance == null) {
