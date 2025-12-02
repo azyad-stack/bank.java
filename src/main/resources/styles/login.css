@@ -19,14 +19,10 @@
 
 .login_logo_container Text {
     -fx-font-size: 2.3em;
-    -fx-font-family: "Segoe UI", "Arial";
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
     -fx-font-weight: bold;
-    -fx-fill: #f8fafc;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 12, 0.15, 0, 3);
-}
-
-.login_logo_container FontAwesomeIconView {
-    -fx-fill: #06b6d4;
+    -fx-fill: white; /* Changed to white */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.1, 0, 2);
 }
 
 /* ---------------------------------------------------
@@ -34,27 +30,18 @@
 ---------------------------------------------------- */
 .account_selector {
     -fx-background-color: rgba(15,23,42,0.85);
-    -fx-background-radius: 12;
-    -fx-border-radius: 12;
-    -fx-border-color: rgba(148,163,184,0.35);
-    -fx-border-width: 1.5;
-    -fx-text-fill: #f1f5f9;
-    -fx-font-family: "Segoe UI", "Arial";
-    -fx-font-size: 1.1em;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: rgba(148,163,184,0.3);
+    -fx-border-width: 1;
+    -fx-text-fill: white; /* Changed to white */
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 1em;
 }
 
 .account_selector .label {
-    -fx-text-fill: #e2e8f0;
-    -fx-font-size: 1.1em;
-}
-
-.account_selector .arrow {
-    -fx-background-color: rgba(6,182,212,0.55);
-    -fx-background-radius: 6;
-}
-
-#choice-box-popup-menu {
-    -fx-background-color: rgba(30,41,59,0.95);
+    -fx-text-fill: white; /* Changed to white */
+    -fx-font-size: 1em;
 }
 
 /* ---------------------------------------------------
@@ -65,21 +52,21 @@
     -fx-alignment: top_left;
     -fx-padding: 20;
     -fx-background-color: rgba(30,41,59,0.85);
-    -fx-background-radius: 18;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 25, 0.15, 0, 8);
+    -fx-background-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 20, 0.1, 0, 6);
 }
 
 .login_form_container Label {
     -fx-font-size: 1.2em;
-    -fx-font-family: "Segoe UI", "Arial";
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
     -fx-font-weight: bold;
-    -fx-text-fill: #e2e8f0;
+    -fx-text-fill: white; /* Changed to white */
 }
 
 #choice-prompt-text {
     -fx-font-weight: 600;
     -fx-font-size: 1.2em;
-    -fx-text-fill: #f1f5f9;
+    -fx-text-fill: white; /* Changed to white */
 }
 
 /* ---------------------------------------------------
@@ -87,59 +74,51 @@
 ---------------------------------------------------- */
 .input_field {
     -fx-background-color: rgba(15,23,42,0.85);
-    -fx-background-radius: 12;
-    -fx-border-radius: 12;
-    -fx-border-color: rgba(148,163,184,0.35);
-    -fx-border-width: 1.5;
-    -fx-text-fill: #f1f5f9;
-    -fx-font-size: 1.15em;
-    -fx-padding: 0 15;
-    -fx-font-family: "Segoe UI", "Arial";
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: rgba(148,163,184,0.3);
+    -fx-border-width: 1;
+    -fx-text-fill: white; /* Changed to white */
+    -fx-font-size: 1em;
+    -fx-padding: 10 15;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.input_field .prompt-text {
+    -fx-text-fill: #94a3b8; /* Keep placeholder text lighter gray */
 }
 
 .input_field:focused {
     -fx-border-color: #06b6d4;
     -fx-border-width: 2;
     -fx-background-color: rgba(15,23,42,0.95);
-    -fx-effect: dropshadow(gaussian, rgba(6,182,212,0.45), 12, 0, 0, 0);
 }
 
 /* ---------------------------------------------------
    LOGIN BUTTON
 ---------------------------------------------------- */
 .login_form_container Button {
-    -fx-background-color: linear-gradient(135deg, #06b6d4, #2563eb);
-    -fx-background-radius: 14;
-    -fx-border-radius: 14;
-    -fx-border-color: rgba(6,182,212,0.55);
-    -fx-border-width: 1;
-    -fx-pref-width: 104;
-    -fx-pref-height: 31;
-    -fx-font-family: "Segoe UI", "Arial";
-    -fx-font-size: 1.15em;
+    -fx-background-color: #2563eb;
+    -fx-background-radius: 8;
+    -fx-pref-width: 320;
+    -fx-pref-height: 44;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
-    -fx-text-fill: white;
-    -fx-effect: dropshadow(gaussian, rgba(6,182,212,0.55), 15, 0.1, 0, 6);
-}
-
-.login_form_container Button:hover {
-    -fx-background-color: linear-gradient(135deg, #0891b2, #1d4ed8);
+    -fx-text-fill: white; /* Already white */
     -fx-cursor: hand;
-    -fx-scale-x: 1.03;
-    -fx-scale-y: 1.03;
-}
-
-.login_form_container Button:pressed {
-    -fx-scale-x: 0.97;
-    -fx-scale-y: 0.97;
-    -fx-background-color: linear-gradient(135deg, #0e7490, #1e40af);
+    -fx-effect: dropshadow(gaussian, rgba(37, 99, 235, 0.3), 4, 0, 0, 1);
 }
 
 /* ---------------------------------------------------
-   ERROR LABEL
+   ERROR LABEL (stays red)
 ---------------------------------------------------- */
 .error_lbl {
-    -fx-text-fill: #f43f5e;
-    -fx-font-weight: bold;
-    -fx-font-family: "Segoe UI", "Arial";
+    -fx-text-fill: #dc2626; /* Kept red for errors */
+    -fx-font-weight: 600;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 14px;
+    -fx-padding: 8 0;
+    -fx-alignment: center;
+    -fx-wrap-text: true;
 }

@@ -1,87 +1,140 @@
 .main_menu_container{
-    -fx-background-color: #EEEEEE;
-    -fx-background-radius: center;
+    -fx-background-color: linear-gradient(to bottom right, #f8fafc, #f1f5f9);
+    -fx-background-position: center;
+}
 
-}
 .left_container{
-    -fx-background-color: #FFFFFF;
-    -fx-background-radius: 10;
-    -fx-effect : dropshadow(two-pass-box,#AAAAAA,5,0,0,4);
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(100, 116, 139, 0.08), 10, 0, 0, 4);
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
 }
+
 /* Title/logo Section */
 .title_container{
-    -fx-background-color: #FFFFFF;
-    -fx-background-radius: 20 20 0 0;
+    -fx-background-color: linear-gradient(to right, #6366f1, #8b5cf6);
+    -fx-background-radius: 16 16 0 0;
     -fx-alignment: top_center;
-    -fx-padding: 10;
+    -fx-padding: 20 10 20 10;
 }
+
 .title_container FontAwesomeIconView{
-    -fx-fill: #0F2A45 ;
+    -fx-fill: #ffffff;
 }
+
 .title_container Text {
-    -fx-fill: #000000;
-    -fx-font-size: 2em;
+    -fx-fill: #ffffff;
+    -fx-font-size: 1.8em;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 1);
 }
-/*Navigation Section*/
+
+/* Navigation Section */
 .menu_container{
-    -fx-padding: 10 10 10 20;
-    -fx-spacing: 20;
+    -fx-padding: 20 20 20 20;
+    -fx-spacing: 12;
 }
+
 .menu_container Button{
-    -fx-pref-width: 115;
-    -fx-pref-height: 40;
-    -fx-background-color: #FFFFFF;
-    -fx-text-fill: #0F2A45 ;
-    -fx-font-size: 1.1em;
-    -fx-align: center_left;
-    -fx-effect: dropshadow(three-pass-box,#DDDDDD,5,0,0,6);
+    -fx-pref-width: 180;
+    -fx-pref-height: 48;
+    -fx-background-color: transparent;
+    -fx-text-fill: #475569;
+    -fx-font-size: 1em;
+    -fx-font-weight: 500;
+    -fx-alignment: center-left;
+    -fx-padding: 0 0 0 20;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-border-color: transparent;
+    -fx-border-width: 1;
 }
-.menu_container button:hover{
-    -fx-cursor :hand;
 
+.menu_container Button:hover{
+    -fx-cursor: hand;
+    -fx-background-color: #f1f5f9;
+    -fx-text-fill: #334155;
+    -fx-border-color: #e2e8f0;
 }
+
+.menu_container Button:pressed {
+    -fx-background-color: #e2e8f0;
+}
+
 .menu_container Button FontAwesomeIconView{
-   -fx-fill: #0F2A45 ;
+    -fx-fill: #64748b;
 }
-.alt_menu_btn{
-    -fx-pref-width: 115;
-    -fx-pref-height: 40;
-    -fx-background-color: #0F2A45 ;
-    -fx-text-fill: #FFFFFF;
-    -fx-font-size: 1.1em;
-    -fx-alignment: center_left;
 
+.menu_container Button:hover FontAwesomeIconView {
+    -fx-fill: #475569;
 }
+
+.alt_menu_btn{
+    -fx-pref-width: 180;
+    -fx-pref-height: 48;
+    -fx-background-color: linear-gradient(to right, #6366f1, #8b5cf6);
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1em;
+    -fx-font-weight: 600;
+    -fx-alignment: center-left;
+    -fx-padding: 0 0 0 20;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.3), 8, 0, 0, 2);
+}
+
+.alt_menu_btn:hover {
+    -fx-background-color: linear-gradient(to right, #4f46e5, #7c3aed);
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.4), 10, 0, 0, 3);
+}
+
 .alt_menu_btn FontAwesomeIconView{
-    -fx-fill: #FFFFFF;
+    -fx-fill: #ffffff;
 }
-/* Report Bug/Support*/
+
+/* Report Bug/Support */
 .report_container {
-    -fx-background-color: #FFFFFF;
-    -fx-background-radius: 10;
+    -fx-background-color: #f8fafc;
+    -fx-background-radius: 12;
     -fx-alignment: center;
-    -fx-padding: 10 0 10 0;
-    -fx-spacing: 10;
+    -fx-padding: 20 15 20 15;
+    -fx-spacing: 12;
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
 }
 
 .report_container Label {
     -fx-text-alignment: center;
     -fx-wrap-text: true;
+    -fx-text-fill: #475569;
+    -fx-font-size: 0.95em;
+    -fx-font-weight: 500;
 }
 
 .report_container Button {
-    -fx-pref-width: 80;
-    -fx-background-color: #0F2A45 ;
-    -fx-text-fill: #FFFFFF;
-    -fx-background-radius: 5;
+    -fx-pref-width: 140;
+    -fx-pref-height: 40;
+    -fx-background-color: #0ea5e9;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 10;
+    -fx-font-weight: 600;
+    -fx-font-size: 0.95em;
+    -fx-effect: dropshadow(gaussian, rgba(14, 165, 233, 0.3), 6, 0, 0, 2);
 }
 
 .report_container Button:hover {
     -fx-cursor: hand;
-    -fx-background-color: #0F2A45 ; /* darker green on hover */
+    -fx-background-color: #0284c7;
+    -fx-effect: dropshadow(gaussian, rgba(14, 165, 233, 0.4), 8, 0, 0, 3);
+}
+
+.report_container Button:pressed {
+    -fx-background-color: #0369a1;
 }
 
 .report_container Button FontAwesomeIconView {
-    -fx-fill: #FFFFFF;
+    -fx-fill: #ffffff;
 }
-

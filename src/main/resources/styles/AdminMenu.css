@@ -1,87 +1,174 @@
-.main_menu_container{
-    -fx-background-color: #EEEEEE;
-    -fx-background-radius: center;
+/* Main Container - Deep modern background */
+.main_menu_container {
+    -fx-background-color: linear-gradient(to bottom right, #0a0e1a, #1a1f35);
+    -fx-background-position: center;
+}
 
+/* Left Sidebar - Glassmorphism effect */
+.left_container {
+    -fx-background-color: rgba(30, 41, 59, 0.7);
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 20, 0, 0, 10);
+    -fx-border-color: rgba(100, 116, 139, 0.3);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-backdrop-filter: blur(10px);
 }
-.left_container{
-    -fx-background-color: #FFFFFF;
-    -fx-background-radius: 10;
-    -fx-effect : dropshadow(two-pass-box,#AAAAAA,5,0,0,4);
-}
-/* Title/logo Section */
-.title_container{
-    -fx-background-color: #FFFFFF;
+
+/* Title Section - Modern gradient with glow */
+.title_container {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
     -fx-background-radius: 20 20 0 0;
-    -fx-alignment: top_center;
-    -fx-padding: 10;
-}
-.title_container FontAwesomeIconView{
-    -fx-fill: #0F2A45 ;
-}
-.title_container Text {
-    -fx-fill: #000000;
-    -fx-font-size: 2em;
-}
-/*Navigation Section*/
-.menu_container{
-    -fx-padding: 10 10 10 20;
-    -fx-spacing: 20;
-}
-.menu_container Button{
-    -fx-pref-width: 115;
-    -fx-pref-height: 40;
-    -fx-background-color: #FFFFFF;
-    -fx-text-fill: #0F2A45 ;
-    -fx-font-size: 1.1em;
-    -fx-align: center_left;
-    -fx-effect: dropshadow(three-pass-box,#DDDDDD,5,0,0,6);
-}
-.menu_container button:hover{
-    -fx-cursor :hand;
-
-}
-.menu_container Button FontAwesomeIconView{
-   -fx-fill: #0F2A45 ;
-}
-.alt_menu_btn{
-    -fx-pref-width: 115;
-    -fx-pref-height: 40;
-    -fx-background-color: #0F2A45 ;
-    -fx-text-fill: #FFFFFF;
-    -fx-font-size: 1.1em;
-    -fx-alignment: center_left;
-
-}
-.alt_menu_btn FontAwesomeIconView{
-    -fx-fill: #FFFFFF;
-}
-/* Report Bug/Support*/
-.report_container {
-    -fx-background-color: #FFFFFF;
-    -fx-background-radius: 10;
     -fx-alignment: center;
-    -fx-padding: 10 0 10 0;
-    -fx-spacing: 10;
+    -fx-padding: 28 20;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.5), 20, 0, 0, 8);
+}
+
+.title_container FontAwesomeIconView {
+    -fx-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 6, 0, 0, 3);
+}
+
+.title_container Text {
+    -fx-fill: #ffffff;
+    -fx-font-size: 2em;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 6, 0, 0, 3);
+    -fx-letter-spacing: 0.5px;
+}
+
+/* Navigation Section - Sleek modern buttons */
+.menu_container {
+    -fx-padding: 24;
+    -fx-spacing: 14;
+}
+
+.menu_container Button {
+    -fx-pref-width: 200;
+    -fx-pref-height: 56;
+    -fx-background-color: rgba(51, 65, 85, 0.6);
+    -fx-text-fill: #e2e8f0;
+    -fx-font-size: 1.05em;
+    -fx-font-weight: 600;
+    -fx-alignment: center-left;
+    -fx-padding: 0 0 0 28;
+    -fx-border-radius: 16;
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(100, 116, 139, 0.3);
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0, 0, 2);
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s ease;
+}
+
+.menu_container Button:hover {
+    -fx-background-color: linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(99, 102, 241, 0.8));
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(59, 130, 246, 0.6), 16, 0, 0, 6);
+    -fx-border-color: rgba(147, 197, 253, 0.5);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+    -fx-translate-x: 4;
+}
+
+.menu_container Button:pressed {
+    -fx-scale-x: 0.97;
+    -fx-scale-y: 0.97;
+    -fx-effect: dropshadow(gaussian, rgba(59, 130, 246, 0.3), 6, 0, 0, 1);
+}
+
+.menu_container Button FontAwesomeIconView {
+    -fx-fill: #e2e8f0;
+}
+
+.menu_container Button:hover FontAwesomeIconView {
+    -fx-fill: #ffffff;
+}
+
+/* Active Button - Vibrant accent color */
+.alt_menu_btn {
+    -fx-pref-width: 200;
+    -fx-pref-height: 56;
+    -fx-background-color: linear-gradient(135deg, #6366f1, #8b5cf6);
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1.05em;
+    -fx-font-weight: 700;
+    -fx-alignment: center-left;
+    -fx-padding: 0 0 0 28;
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(167, 139, 250, 0.5);
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.7), 18, 0, 0, 6);
+    -fx-cursor: hand;
+}
+
+.alt_menu_btn:hover {
+    -fx-background-color: linear-gradient(135deg, #4f46e5, #7c3aed);
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.9), 24, 0, 0, 9);
+    -fx-border-color: rgba(167, 139, 250, 0.7);
+    -fx-scale-x: 1.04;
+    -fx-scale-y: 1.04;
+    -fx-translate-x: 4;
+}
+
+.alt_menu_btn FontAwesomeIconView {
+    -fx-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 3, 0, 0, 2);
+}
+
+/* Report Bug Section - Modern accent */
+.report_container {
+    -fx-background-color: rgba(30, 41, 59, 0.5);
+    -fx-background-radius: 16;
+    -fx-alignment: center;
+    -fx-padding: 28;
+    -fx-spacing: 16;
+    -fx-border-color: rgba(99, 102, 241, 0.25);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0, 0, 2);
 }
 
 .report_container Label {
     -fx-text-alignment: center;
     -fx-wrap-text: true;
+    -fx-text-fill: #cbd5e1;
+    -fx-font-size: 0.95em;
+    -fx-font-weight: 500;
+    -fx-line-spacing: 2px;
 }
 
 .report_container Button {
-    -fx-pref-width: 80;
-    -fx-background-color: #0F2A45 ;
-    -fx-text-fill: #FFFFFF;
-    -fx-background-radius: 5;
+    -fx-pref-width: 170;
+    -fx-pref-height: 50;
+    -fx-background-color: linear-gradient(135deg, #ec4899, #f472b6);
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 14;
+    -fx-font-weight: 700;
+    -fx-font-size: 1em;
+    -fx-effect: dropshadow(gaussian, rgba(236, 72, 153, 0.5), 14, 0, 0, 4);
+    -fx-cursor: hand;
+    -fx-border-color: rgba(249, 168, 212, 0.3);
+    -fx-border-width: 1;
+    -fx-border-radius: 14;
 }
 
 .report_container Button:hover {
-    -fx-cursor: hand;
-    -fx-background-color: #0F2A45 ; /* darker green on hover */
+    -fx-background-color: linear-gradient(135deg, #db2777, #ec4899);
+    -fx-effect: dropshadow(gaussian, rgba(236, 72, 153, 0.7), 20, 0, 0, 7);
+    -fx-scale-x: 1.06;
+    -fx-scale-y: 1.06;
+    -fx-border-color: rgba(249, 168, 212, 0.5);
+}
+
+.report_container Button:pressed {
+    -fx-scale-x: 0.94;
+    -fx-scale-y: 0.94;
+    -fx-effect: dropshadow(gaussian, rgba(236, 72, 153, 0.4), 10, 0, 0, 2);
 }
 
 .report_container Button FontAwesomeIconView {
-    -fx-fill: #FFFFFF;
+    -fx-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 3, 0, 0, 2);
 }
-
