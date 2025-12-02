@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -47,6 +48,10 @@ public class ViewFactory {
         }
         return dashboardView;
     }
+    public Node getTransactionsView() {
+    }
+    public Node getAccountsView() {
+    }
     public void showLoginWindow() {
        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
         createStage(loader,"GADZ'Art Bank");
@@ -77,5 +82,7 @@ public class ViewFactory {
         stage.setTitle(title);
         stage.show();
     }
+
+
 
 }
