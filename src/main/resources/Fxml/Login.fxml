@@ -21,7 +21,7 @@
         <TextField fx:id="payee_adress_fill" styleClass="input_field" />
         <Label prefHeight="17.0" prefWidth="82.0" text="Password:" />
         <TextField fx:id="password_fill" styleClass="input_field" />
-        <Button fx:id="login_btn" mnemonicParsing="false" prefHeight="48.0" prefWidth="105.0" text="log in" />
-        <Label fx:id="error_lbl" prefHeight="17.0" prefWidth="57.0" styleClass="error_lbl" text="Error" />
+        <Button fx:id="login_btn" mnemonicParsing="false" prefHeight="48.0" prefWidth="105.0" styleClass="login_container" text="log in" />
+        <Label fx:id="error_lbl" prefHeight="17.0" prefWidth="57.0" styleClass="error_lbl"  />
     </VBox>
 </AnchorPane>

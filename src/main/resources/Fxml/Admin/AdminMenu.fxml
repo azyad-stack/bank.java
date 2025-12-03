@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="180.0" styleClass="main_menu_container" stylesheets="@../../styles/AdminMenu.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafxapp.Controllers.Admin.AdminMenuController">
-    <AnchorPane prefHeight="730.0" prefWidth="160.0" styleClass="left_container">
+    <AnchorPane prefHeight="730.0" prefWidth="100.0" styleClass="left_container">
         <VBox prefHeight="80.0" prefWidth="160.0" styleClass="title_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <FontAwesomeIconView glyphName="DOLLAR" selectionEnd="1" size="30" text="" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="GADZ'ART BANK" />
@@ -17,12 +17,12 @@
                     <FontAwesomeIconView glyphName="USER_PLUS" size="20" />
                 </graphic>
             </Button>
-            <Button fx:id="clients_btn" mnemonicParsing="false" text="Clients">
+            <Button fx:id="clients_btn" mnemonicParsing="false" prefWidth="168.0" text="Clients">
                 <graphic>
                     <FontAwesomeIconView glyphName="USERS" size="20" />
                 </graphic>
             </Button>
-            <Button fx:id="deposit_client" mnemonicParsing="false" text="Deposit">
+            <Button fx:id="deposit_client" mnemonicParsing="false" prefWidth="166.0" text="Deposit">
                 <graphic>
                     <FontAwesomeIconView glyphName="MONEY" size="20" />
                 </graphic>

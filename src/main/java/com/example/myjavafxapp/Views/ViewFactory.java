@@ -1,76 +1,128 @@
 package com.example.myjavafxapp.Views;
 
 import com.example.myjavafxapp.Controllers.Admin.AdminController;
+import com.example.myjavafxapp.Controllers.User.UserController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class ViewFactory {
     private AccountType loginAccountType;
+    //Client Views
+    private final ObjectProperty<UserMenuOptions> userSelectedMenuItem;
+    private AnchorPane dashboardView;
+    private AnchorPane transactionView;
+    private AnchorPane accountsView;
+
+     // Admin Views
     private final ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
-    private AnchorPane createClientView;
+     private AnchorPane createUserView;
+     private AnchorPane clientsView;
 
     public ViewFactory() {
         this.loginAccountType = AccountType.CLIENT;
-        this.adminSelectedMenuItem = new SimpleObjectProperty<>();
+        this.userSelectedMenuItem = new SimpleObjectProperty<>();
+        //Admin Views
+       this.adminSelectedMenuItem = new SimpleObjectProperty<>();
     }
-
     public AccountType getLoginAccountType() {
         return loginAccountType;
     }
-
     public void setLoginAccountType(AccountType loginAccountType) {
         this.loginAccountType = loginAccountType;
     }
 
-    // --- LOGIN VIEW ---
-    private FXMLLoader loadLoginView() {
-        return loadFXML("/Fxml/Login.fxml");
-    }
 
-    public void showLoginWindow() {
-        createStage(loadLoginView(), "Login");
+    /**
+     * User View Section
+     *
+     * **/
+    public ObjectProperty<UserMenuOptions> getUserSelectedMenuItem() {
+        return userSelectedMenuItem;
     }
-
-    // --- CLIENT DASHBOARD ---
-    private FXMLLoader loadClientDashboardView() {
-        return loadFXML("/Fxml/User/Dashboard.fxml");
-    }
-
-    public void showClientWindow() {
-        createStage(loadClientDashboardView(), "Client Dashboard");
-    }
-
-    // --- ADMIN VIEWS SECTION ---
-    public ObjectProperty<AdminMenuOptions> getAdminSelectedMenuItem() {
-        return adminSelectedMenuItem;
-    }
-
-    public AnchorPane getCreateClientView() {
-        if (createClientView == null) {
+    public AnchorPane getDashboardView() {
+        if(dashboardView == null) {
             try {
-                createClientView = new FXMLLoader(getClass().getResource("/Fxml/Admin/CreateClient.fxml")).load();
-            } catch (Exception e){
+                dashboardView = new FXMLLoader(getClass().getResource("/Fxml/User/Dashboard.fxml")).load();
+
+            }catch (Exception e){
                 e.printStackTrace();
             }
         }
-        return createClientView;
+        return dashboardView;
+    }
+    public AnchorPane getTransactionsView() {
+        if(transactionView == null) {
+            try {
+                transactionView = new FXMLLoader(getClass().getResource("/Fxml/User/Transactions.fxml")).load();
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+        return transactionView;
+    }
+    public AnchorPane getAccountsView() {
+        if(accountsView == null) {
+            try {
+                accountsView = new FXMLLoader(getClass().getResource("/Fxml/User/Accounts.fxml")).load();
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+        return accountsView;
     }
 
+    public void showClientWindow() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/User/User.fxml"));
+        UserController userController = new UserController();
+        loader.setController(userController);
+        createStage(loader,"USER");
+    }
+    /*
+    * Admin Section
+    * */
+
+    public ObjectProperty<AdminMenuOptions> getAdminSelectedMenuItem () {
+        return adminSelectedMenuItem;
+    }
+    public AnchorPane getClientsView() {
+        if(clientsView == null) {
+            try {
+                clientsView = new FXMLLoader(getClass().getResource("Fxml/Admin/Clients.fxml")).load();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return clientsView;
+    }
+    public AnchorPane getCreateUserView() {
+        if(createUserView == null) {
+            try {
+                createUserView = new FXMLLoader(getClass().getResource("/Fxml/Admin/CreateUser.fxml")).load();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return createUserView;
+    }
     public void showAdminWindow() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Admin/Admin.fxml"));
-        AdminController controller = new AdminController();
-        loader.setController(controller);
-        createStage(loader, "Admin");
+        AdminController adminController = new AdminController();
+        loader.setController(adminController);
+        createStage(loader,"ADMIN");
     }
-
-    private FXMLLoader loadFXML(String resourcePath) {
-        return new FXMLLoader(getClass().getResource(resourcePath));
+    public void showLoginWindow() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
+        createStage(loader,"GADZ'Art Bank");
     }
-
     private void createStage(FXMLLoader loader, String title) {
         Scene scene;
         try {
@@ -86,9 +138,8 @@ public class ViewFactory {
         stage.show();
     }
 
-    public void closeStage(Stage stage) {
-        if (stage != null) {
-            stage.close();
-        }
+    public void closeStage(Stage currentStage) {
+       currentStage.close();
     }
+
 }

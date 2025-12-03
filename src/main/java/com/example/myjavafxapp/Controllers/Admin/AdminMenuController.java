@@ -21,17 +21,26 @@ public class AdminMenuController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         addListeners();
     }
 
     private void addListeners(){
         // You must link the button click to the method here
         create_client_btn.setOnAction(event -> onCreateClient());
+        clients_btn.setOnAction(event -> onClients());
+        logout_btn.setOnAction(event -> onlogout());
+    }
+
+    private void onlogout() {
+        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.LOGOUT);
+    }
+
+    private void onClients() {
+        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.CLIENTS);
     }
 
     private void onCreateClient(){
-        // FIX 1: Added () to getInstance
-        // FIX 2: Changed getClient... to getAdmin...
-        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.CREATE_CLIENTS);
+        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.CREATE_CLIENT);
     }
 }

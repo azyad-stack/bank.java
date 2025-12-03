@@ -1,7 +1,8 @@
 package com.example.myjavafxapp.Views;
 
 public enum AdminMenuOptions {
-    CREATE_CLIENTS,
+    CREATE_CLIENT,
     CLIENTS,
-    DEPOSIT
+    DEPOSIT,
+    LOGOUT
 }
