@@ -7,9 +7,6 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Light.Distant?>
-<?import javafx.scene.effect.Lighting?>
-<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -17,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="776.0" prefWidth="876.0" styleClass="dashboard" stylesheets="@../../styles/Dashboard.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="776.0" prefWidth="876.0" styleClass="dashboard" stylesheets="@../../styles/Dashboard.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafxapp.Controllers.User.DashboardController">
     <Text fx:id="user_name" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="user_name" text="HI," AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="30.0">
         <font>
             <Font size="16.0" />
@@ -36,10 +33,10 @@
             <VBox prefHeight="100.0" prefWidth="35.0" styleClass="account_VBox" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="14.0" />
             <FontAwesomeIconView glyphName="MONEY" size="30" styleClass="account_FontAwesomeIconView" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="7.0" />
             <Text fill="#f2eeee" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="account_text" text="Checking Account" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" />
-         <styleClass>
-            <String fx:value="account" />
-            <String fx:value=" account_gradient" />
-         </styleClass>
+            <styleClass>
+                <String fx:value="account" />
+                <String fx:value="account_gradient" />
+            </styleClass>
         </AnchorPane>
 
         <!-- Savings Account -->
@@ -68,21 +65,11 @@
 
     <VBox prefHeight="365.0" prefWidth="240.0" spacing="10" styleClass="new_trans_container" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="370.0">
         <Label text="Payee Address" textFill="WHITE" />
-        <TextField fx:id="payee_field" />
+        <TextField fx:id="payee_field" styleClass="new_trans_container" />
         <Label text="Amount in MAD" textFill="#edebeb" />
-        <TextField fx:id="amount_field" />
-        <Label text="Message:(Optional)"/>
-        <TextArea fx:id="message_field" prefHeight="70.0" prefWidth="200.0" />
-        <Button fx:id="send_money_btn" mnemonicParsing="false" styleClass="dashboard" text="Send Money" textFill="#f8f7f7" />
-      <effect>
-         <Lighting>
-            <bumpInput>
-               <Shadow />
-            </bumpInput>
-            <light>
-               <Light.Distant />
-            </light>
-         </Lighting>
-      </effect>
+        <TextField fx:id="amount_field" styleClass="new_trans_container" />
+        <Label text="Message (Optional)" textFill="WHITE" />
+        <TextArea fx:id="message_field" prefHeight="70.0" prefWidth="200.0" styleClass="new_trans_container" />
+        <Button fx:id="send_money_btn" mnemonicParsing="false" text="Send Money" textFill="#f8f7f7" />
     </VBox>
 </AnchorPane>
