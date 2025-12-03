@@ -21,17 +21,7 @@ public class AdminController implements Initializable {
         Model.getInstance().getViewFactory().getAdminSelectedMenuItem().addListener((observableValue, oldVal, newVal) -> {
 
             // Example switch — you will customize this later
-            switch (newVal) {
-                case CREATE_CLIENT:
-                    AnchorPane view = Model.getInstance().getViewFactory().getCreateClientView();
-                    admin_parent.setCenter(view);
-                    break;
 
-                // Add your other menu options here…
-
-                default:
-                    break;
-            }
 
         });
     }
