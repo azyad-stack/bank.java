@@ -7,23 +7,20 @@ import com.example.myjavafxapp.Views.ViewFactory;
  * Holds shared objects such as the {@link ViewFactory}.
  */
 public final class Model {
-
+    private static Model Model;
     private static volatile Model instance;
     private final ViewFactory viewFactory;
 
     private Model() {
+
         this.viewFactory = new ViewFactory();
     }
 
     public static synchronized Model getInstance() {
-        if (instance == null) {
-            synchronized (Model.class) {
-                if (instance == null) {
-                    instance = new Model();
-                }
-            }
+        if (Model == null) {
+            Model = new Model();
         }
-        return instance;
+        return Model;
     }
 
     public ViewFactory getViewFactory() {

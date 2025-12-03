@@ -18,25 +18,26 @@ public class UserMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         addListeners();
     }
 
     private void addListeners() {
-        dashboard_btn.setOnAction(e -> onDashboard());
+        dashboard_btn.setOnAction(event -> onDashboard());
         transactions_btn.setOnAction(event -> onTransactions());
         accounts_btn.setOnAction(event -> onAccounts());
     }
 
     private void onAccounts() {
-        Model.getInstance().getViewFactory().getUserSelectedMenuItemProperty().set(UserMenuOptions.ACCOUNTS);
+        Model.getInstance().getViewFactory().getUserSelectedMenuItem().set(UserMenuOptions.ACCOUNTS);
     }
 
     private void onTransactions() {
-        Model.getInstance().getViewFactory().getUserSelectedMenuItemProperty().set(UserMenuOptions.TRANSACTIONS);
+        Model.getInstance().getViewFactory().getUserSelectedMenuItem().set(UserMenuOptions.TRANSACTIONS);
     }
 
     private void onDashboard() {
-        Model.getInstance().getViewFactory().getUserSelectedMenuItemProperty().set(UserMenuOptions.DASHBOARD);
+        Model.getInstance().getViewFactory().getUserSelectedMenuItem().set(UserMenuOptions.DASHBOARD);
 
     }
 }

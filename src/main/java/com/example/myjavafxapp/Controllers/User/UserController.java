@@ -12,12 +12,12 @@ public class UserController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Model.getInstance().getViewFactory().getUserSelectedMenuItemProperty().addListener((observable, oldValue, newValue) -> {
+        Model.getInstance().getViewFactory().getUserSelectedMenuItem().addListener((observable, oldValue, newValue) -> {
             switch (newValue) {
                 case TRANSACTIONS -> user_parent.setCenter(Model.getInstance().getViewFactory().getTransactionsView());
                 case ACCOUNTS -> user_parent.setCenter(Model.getInstance().getViewFactory().getAccountsView());
                 default -> user_parent.setCenter(Model.getInstance().getViewFactory().getDashboardView());
             }
-        })
+        });
     }
 }

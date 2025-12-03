@@ -21,6 +21,7 @@ public class AdminMenuController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         addListeners();
     }
 
@@ -32,6 +33,6 @@ public class AdminMenuController implements Initializable {
     private void onCreateClient(){
         // FIX 1: Added () to getInstance
         // FIX 2: Changed getClient... to getAdmin...
-        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.CREATE_CLIENTS);
+        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.CREATE_CLIENT);
     }
 }

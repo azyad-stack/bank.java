@@ -5,10 +5,10 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:id="admin_parent">
     <left>
-        <fx:include source="AdminMenu.fxml"
+        <fx:include source="AdminMenu.fxml"/>
     </left>
     <center>
-        <fx:include source="CreateUser.fxml"
+        <fx:include source="CreateUser.fxml"/>
     </center>
 
 </BorderPane>

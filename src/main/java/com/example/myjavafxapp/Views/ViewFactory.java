@@ -4,29 +4,34 @@ import com.example.myjavafxapp.Controllers.Admin.AdminController;
 import com.example.myjavafxapp.Controllers.User.UserController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class ViewFactory {
+    private AccountType loginAccountType;
     //Client Views
     private final ObjectProperty<UserMenuOptions> userSelectedMenuItem;
     private AnchorPane dashboardView;
     private AnchorPane transactionView;
     private AnchorPane accountsView;
 
-    //Admin Views
-    private final StringProperty adminSelectedMenuItem;
-    private AnchorPane createUserView;
-
+     // Admin Views
+    private final ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
+     private AnchorPane createUserView;
 
     public ViewFactory() {
+        this.loginAccountType = AccountType.CLIENT;
         this.userSelectedMenuItem = new SimpleObjectProperty<>();
-        this.adminSelectedMenuItem = new SimpleStringProperty("");
+        //Admin Views
+       this.adminSelectedMenuItem = new SimpleObjectProperty<>();
+    }
+    public AccountType getLoginAccountType() {
+        return loginAccountType;
+    }
+    public void setLoginAccountType(AccountType loginAccountType) {
+        this.loginAccountType = loginAccountType;
     }
 
 
@@ -34,8 +39,8 @@ public class ViewFactory {
      * User View Section
      *
      * **/
-    public ObjectProperty<UserMenuOptions> getUserSelectedMenuItemProperty() {
-        return this.userSelectedMenuItem;
+    public ObjectProperty<UserMenuOptions> getUserSelectedMenuItem() {
+        return userSelectedMenuItem;
     }
     public AnchorPane getDashboardView() {
         if(dashboardView == null) {
@@ -48,25 +53,64 @@ public class ViewFactory {
         }
         return dashboardView;
     }
-    public Node getTransactionsView() {
+    public AnchorPane getTransactionsView() {
+        if(transactionView == null) {
+            try {
+                transactionView = new FXMLLoader(getClass().getResource("/Fxml/User/Transactions.fxml")).load();
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+        return transactionView;
     }
-    public Node getAccountsView() {
+    public AnchorPane getAccountsView() {
+        if(accountsView == null) {
+            try {
+                accountsView = new FXMLLoader(getClass().getResource("/Fxml/User/Accounts.fxml")).load();
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+        return accountsView;
     }
-    public void showLoginWindow() {
-       FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
-        createStage(loader,"GADZ'Art Bank");
-    }
-    public void showUserWindow() {
+
+    public void showClientWindow() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/User/User.fxml"));
         UserController userController = new UserController();
         loader.setController(userController);
         createStage(loader,"USER");
+    }
+    /*
+    * Admin Section
+    * */
+
+    public ObjectProperty<AdminMenuOptions> getAdminSelectedMenuItem () {
+        return adminSelectedMenuItem;
+    }
+
+    public AnchorPane getCreateUserView() {
+        if(createUserView == null) {
+            try {
+                createUserView = new FXMLLoader(getClass().getResource("/Fxml/Admin/CreateUser.fxml")).load();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return createUserView;
     }
     public void showAdminWindow() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Admin/Admin.fxml"));
         AdminController adminController = new AdminController();
         loader.setController(adminController);
         createStage(loader,"ADMIN");
+    }
+    public void showLoginWindow() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
+        createStage(loader,"GADZ'Art Bank");
     }
     private void createStage(FXMLLoader loader, String title) {
         Scene scene;
@@ -83,6 +127,7 @@ public class ViewFactory {
         stage.show();
     }
 
-
-
+    public void closeStage(Stage currentStage) {
+       currentStage.close();
+    }
 }

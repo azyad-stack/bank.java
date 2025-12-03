@@ -3,11 +3,11 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:id="user_parent">
-<left>
-    <fx:include source="UserMenu.fxml"
-</left>
-<center>
-    <fx:include source="Dashboard.fxml"
-</center>
+    <left>
+        <fx:include source="UserMenu.fxml"/>
+    </left>
+    <center>
+        <fx:include source="Dashboard.fxml"/>
+    </center>
 
 </BorderPane>

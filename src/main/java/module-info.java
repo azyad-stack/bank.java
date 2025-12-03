@@ -7,7 +7,13 @@ module com.example.myjavafxapp {
     requires org.xerial.sqlitejdbc; // SQLite JDBC
     requires com.dlsc.formsfx;
 
+    // Open packages to javafx.fxml for reflection (FXML injection)
     opens com.example.myjavafxapp to javafx.fxml;
+    opens com.example.myjavafxapp.Controllers to javafx.fxml;
+    opens com.example.myjavafxapp.Controllers.Admin to javafx.fxml;
+    opens com.example.myjavafxapp.Controllers.User to javafx.fxml;
+
+    // Export packages for public access
     exports com.example.myjavafxapp;
     exports com.example.myjavafxapp.Controllers;
     exports com.example.myjavafxapp.Controllers.Admin;

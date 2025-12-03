@@ -33,36 +33,18 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         acc_selector.setItems(FXCollections.observableArrayList(AccountType.CLIENT, AccountType.ADMIN));
         acc_selector.setValue(Model.getInstance().getViewFactory().getLoginAccountType());
-        acc_selector.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (observable == null) {
-                return;
-            }
-            if (newValue == null) {
-                acc_selector.setValue(oldValue);
-                return;
-            }
-            Model.getInstance().getViewFactory().setLoginAccountType(newValue);
-        });
-        login_btn.setOnAction(event -> {
-            event.consume();
-            onLogin();
-        });
+        acc_selector.valueProperty().addListener(observable -> Model.getInstance().getViewFactory().setLoginAccountType(acc_selector.getValue()));
+        login_btn.setOnAction(event  -> onLogin());
     }
 
     private void onLogin() {
-        Model model = Model.getInstance();
-        Stage currentStage = (Stage) login_btn.getScene().getWindow();
-
-        model.getViewFactory().closeStage(currentStage);
-
-        AccountType selectedType = acc_selector.getValue();
-        model.getViewFactory().setLoginAccountType(selectedType);
-
-        if (selectedType == AccountType.ADMIN) {
-            model.getViewFactory().showAdminWindow();
-            return;
+        Stage  stage = (Stage) error_lbl.getScene().getWindow();
+        Model.getInstance().getViewFactory().closeStage(stage);
+        if (Model.getInstance().getViewFactory().getLoginAccountType() == AccountType.CLIENT) {
+            Model.getInstance().getViewFactory().showClientWindow();
+        }else{
+            Model.getInstance().getViewFactory().showAdminWindow();
         }
 
-        model.getViewFactory().showClientWindow();
     }
 }
