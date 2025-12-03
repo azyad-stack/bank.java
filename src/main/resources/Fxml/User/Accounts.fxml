@@ -1,14 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.myjavafxapp.Controllers.User.AccountsController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="accounts_view_container" stylesheets="@../../styles/Accounts.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafxapp.Controllers.User.AccountsController">
+    <Text layoutX="31.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Checking Account" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+    <VBox layoutX="14.0" layoutY="47.0" prefHeight="300.0" prefWidth="450.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="40.0">
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Account Number:" />
+        <Label fx:id="ch_acc_num" text="3452 4950 " />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Transactions Limit:" />
+        <Label fx:id="transaction_limit" text="10" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date Created:" />
+        <Label fx:id="ch_acc_date" text="2025-12-03" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Balance:" />
+        <Label fx:id="ch_acc_bal" text="3500.00 MAD" />
+    </VBox>
+    <Text layoutX="30.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Savings Account" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="364.0" />
+    <VBox layoutX="24.0" layoutY="57.0" prefHeight="300.0" prefWidth="450.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="14.0">
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Account Number:" />
+        <Label fx:id="sv_acc_num" text="3452 4950 " />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Withdrawal Limit:" />
+        <Label fx:id="withdrawal_limit" text="2000.00 MAD" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date Created:" />
+        <Label fx:id="sv_acc_date" text="2025-12-03" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Balance:" />
+        <Label fx:id="sv_acc_bal" text="14000.00 MAD" />
+    </VBox>
+    <Text layoutX="506.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move Fund To Savings Account:" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="38.0" />
+    <TextField fx:id="amount_to_sv" layoutX="503.0" layoutY="71.0" prefHeight="26.0" prefWidth="221.0" AnchorPane.rightAnchor="164.0" AnchorPane.topAnchor="72.0" />
+    <Button fx:id="trans_to_sv_btn" layoutX="576.0" layoutY="125.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="221.0" text="Transfer" AnchorPane.rightAnchor="164.0" AnchorPane.topAnchor="123.0">
+        <graphic>
+          <FontAwesomeIconView fill="WHITE" glyphName="EXCHANGE" size="20" />
+        </graphic>
+    </Button>
+    <Text layoutX="516.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move Fund To Checking Account:" AnchorPane.rightAnchor="164.0" AnchorPane.topAnchor="364.0" />
+    <TextField fx:id="amount_to_ch" layoutX="513.0" layoutY="81.0" prefHeight="26.0" prefWidth="221.0" AnchorPane.rightAnchor="164.0" AnchorPane.topAnchor="392.0" />
+    <Button fx:id="trans_to_ch_btn" layoutX="586.0" layoutY="135.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="221.0" text="Transfer" AnchorPane.rightAnchor="164.0" AnchorPane.topAnchor="441.0">
+        <graphic>
+          <FontAwesomeIconView fill="WHITE" glyphName="EXCHANGE" size="20" />
+        </graphic>
+    </Button>
 </AnchorPane>

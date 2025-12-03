@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class UserController implements Initializable {
+
     public BorderPane user_parent;
 
     @Override

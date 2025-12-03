@@ -54,10 +54,10 @@
     </HBox>
 
     <VBox prefHeight="180.0" prefWidth="210.0" styleClass="acc_summary_container" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="income_amount" text="Income" />
+        <Text fill="#fdfafa" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="income_amount" text="Income" />
         <Label fx:id="income_label" styleClass="income_amount" text="+350,00 MAD" />
         <Line endX="160.0" />
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="expense_amount" text="Expenses" />
+        <Text fill="#efeeee" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="expense_amount" text="Expenses" />
         <Label fx:id="expenses_label" styleClass="expense_amount" text="-200,00 MAD" />
     </VBox>
 
@@ -71,9 +71,9 @@
         <TextField fx:id="payee_field" />
         <Label text="Amount in MAD" textFill="#edebeb" />
         <TextField fx:id="amount_field" />
-        <Label text="Message:(Optional)" />
+        <Label text="Message:(Optional)"/>
         <TextArea fx:id="message_field" prefHeight="70.0" prefWidth="200.0" />
-        <Button fx:id="send_money_btn" mnemonicParsing="false" text="Send Money" />
+        <Button fx:id="send_money_btn" mnemonicParsing="false" styleClass="dashboard" text="Send Money" textFill="#f8f7f7" />
       <effect>
          <Lighting>
             <bumpInput>
