@@ -5,6 +5,7 @@ import com.example.myjavafxapp.Controllers.User.UserController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -20,6 +21,7 @@ public class ViewFactory {
      // Admin Views
     private final ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
      private AnchorPane createUserView;
+     private AnchorPane clientsView;
 
     public ViewFactory() {
         this.loginAccountType = AccountType.CLIENT;
@@ -91,7 +93,16 @@ public class ViewFactory {
     public ObjectProperty<AdminMenuOptions> getAdminSelectedMenuItem () {
         return adminSelectedMenuItem;
     }
-
+    public AnchorPane getClientsView() {
+        if(clientsView == null) {
+            try {
+                clientsView = new FXMLLoader(getClass().getResource("Fxml/Admin/Clients.fxml")).load();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return clientsView;
+    }
     public AnchorPane getCreateUserView() {
         if(createUserView == null) {
             try {
@@ -130,4 +141,5 @@ public class ViewFactory {
     public void closeStage(Stage currentStage) {
        currentStage.close();
     }
+
 }
