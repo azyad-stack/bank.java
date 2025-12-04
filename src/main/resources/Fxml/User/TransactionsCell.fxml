@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.myjavafxapp.Controllers.User.TransactionsCellController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="60.0" prefWidth="550.0" styleClass="cell_container" stylesheets="@../../styles/TransactionsCell.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafxapp.Controllers.User.TransactionsCellController">
+   <children>
+      <VBox layoutY="-54.0" prefHeight="50.0" prefWidth="80.0" styleClass="trans_icon_container" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <FontAwesomeIconView fx:id="left_arrow_trans_icon" glyphName="LONG_ARROW_LEFT" size="20" />
+            <FontAwesomeIconView fx:id="right_arrow_trans_icon" glyphName="LONG_ARROW_RIGHT" size="20" text="" />
+         </children>
+      </VBox>
+      <Label fx:id="date_trans_lbl" layoutX="90.0" layoutY="22.0" styleClass="rans_date_lbl" text="2025-12-4" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="22.0" />
+      <Label fx:id="sender_trans_lbl" layoutX="195.0" layoutY="22.0" styleClass="rans_pAddress_lbl" text="Anas" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="22.0" />
+      <Label fx:id="reciever_trans_lbl" layoutX="202.33333333333334" layoutY="22.0" prefHeight="17.0" prefWidth="55.0" styleClass="rans_pAddress_lbl" text="Zakarie" AnchorPane.leftAnchor="358.0" AnchorPane.topAnchor="22.0" />
+      <Line endY="20.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="22.0" />
+      <Label fx:id="amount_trans_lbl" layoutX="483.0" layoutY="21.0" prefHeight="28.0" prefWidth="73.0" styleClass="trans_amount_lbl" text="100" AnchorPane.leftAnchor="483.0" AnchorPane.topAnchor="22.0">
+         <graphic>
+            <FontAwesomeIconView glyphName="DOLLAR" />
+         </graphic>
+      </Label>
+   </children>
 </AnchorPane>

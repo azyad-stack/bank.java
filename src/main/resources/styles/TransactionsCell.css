@@ -1,0 +1,125 @@
+/* Modern Dark Theme CSS with Animations */
+
+@keyframes slideInUp {
+    from {
+        -fx-opacity: 0;
+        -fx-translate-y: 10;
+    }
+    to {
+        -fx-opacity: 1;
+        -fx-translate-y: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        -fx-opacity: 0;
+    }
+    to {
+        -fx-opacity: 1;
+    }
+}
+
+@keyframes shadowPulse {
+    0%, 100% {
+        -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 8, 0.15, 4, 6);
+    }
+    50% {
+        -fx-effect: dropshadow(three-pass-box, rgba(99, 102, 241, 0.3), 12, 0.2, 6, 8);
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        -fx-background-color: #6366F1;
+    }
+    50% {
+        -fx-background-color: #8B5CF6;
+    }
+    100% {
+        -fx-background-color: #6366F1;
+    }
+}
+
+.cell_container {
+    -fx-background-color: #1A1F2E;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 8, 0.15, 4, 6);
+    -fx-padding: 12;
+    -fx-animation: slideInUp 0.5s ease-out;
+}
+
+.cell_container:hover {
+    -fx-background-color: #252D3D;
+    -fx-animation: shadowPulse 1.5s ease-in-out infinite;
+}
+
+.rans_icon_container {
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+    -fx-spacing: 8;
+    -fx-animation: fadeIn 0.6s ease-out 0.1s backwards;
+}
+
+.rans_date_lbl {
+    -fx-text-fill: #7C8AA6;
+    -fx-font-weight: 500;
+    -fx-font-size: 12;
+    -fx-animation: fadeIn 0.6s ease-out 0.2s backwards;
+}
+
+.rans_pAddress_lbl {
+    -fx-text-fill: #E8EAED;
+    -fx-font-weight: 600;
+    -fx-font-size: 13;
+    -fx-animation: fadeIn 0.6s ease-out 0.3s backwards;
+}
+
+.cell_container line {
+    -fx-stroke: #2D3547;
+    -fx-stroke-width: 1;
+}
+
+.trans_icon_container {
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+    -fx-spacing: 8;
+    -fx-animation: fadeIn 0.6s ease-out 0.1s backwards;
+}
+
+.trans_date_lbl {
+    -fx-text-fill: #7C8AA6;
+    -fx-font-weight: 500;
+    -fx-font-size: 12;
+    -fx-animation: fadeIn 0.6s ease-out 0.2s backwards;
+}
+
+.trans_pAddress_lbl {
+    -fx-text-fill: #E8EAED;
+    -fx-font-weight: 600;
+    -fx-font-size: 13;
+    -fx-animation: fadeIn 0.6s ease-out 0.3s backwards;
+}
+
+.trans_container line {
+    -fx-stroke: #2D3547;
+    -fx-stroke-width: 1;
+}
+
+.trans_amount_lbl {
+    -fx-background-color: linear-gradient(to top right, #1E3A8A 0%, #3B82F6 50%, #60A5FA 100%);
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 6;
+    -fx-padding: 6 10;
+    -fx-font-weight: 600;
+    -fx-font-size: 13;
+    -fx-animation: fadeIn 0.6s ease-out 0.4s backwards;
+}
+
+.trans_amount_lbl:hover {
+    -fx-animation: gradientShift 2s ease-in-out infinite;
+}
+
+.trans_amount_lbl FontAwesomeIconView {
+    -fx-fill: #FFFFFF;
+}
