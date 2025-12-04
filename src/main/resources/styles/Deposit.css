@@ -1,0 +1,146 @@
+/* Main Container */
+.deposit_container {
+    -fx-background-color: #0a0e27;
+    -fx-padding: 0;
+}
+
+/* VBox Container */
+.deposit_container VBox {
+    -fx-spacing: 15;
+    -fx-padding: 20;
+    -fx-background-color: #1a1f3a;
+    -fx-border-radius: 12;
+    -fx-border-color: #2d3561;
+    -fx-border-width: 1;
+}
+
+/* Search Box */
+.search_box {
+    -fx-font-size: 14;
+    -fx-padding: 12;
+    -fx-border-radius: 6;
+    -fx-border-color: #3d4580;
+    -fx-border-width: 1;
+    -fx-text-fill: #e0e0e0;
+    -fx-control-inner-background: #0f1629;
+    -fx-pref-width: 400;
+    -fx-font-family: "Segoe UI", "Arial";
+    -fx-prompt-text-fill: #6b7280;
+}
+
+.search_box:focused {
+    -fx-border-color: #00d4ff;
+    -fx-border-width: 2;
+    -fx-text-fill: #ffffff;
+}
+
+/* Text Labels */
+Text {
+    -fx-font-size: 14;
+    -fx-fill: #c9d6ff;
+    -fx-font-family: "Segoe UI", "Arial";
+}
+
+.deposit_container Text {
+    -fx-font-weight: bold;
+}
+
+.deposit_container VBox > Text:first-child {
+    -fx-font-size: 16;
+    -fx-fill: #00d4ff;
+}
+
+/* ListView */
+ListView {
+    -fx-font-size: 12;
+    -fx-padding: 5;
+    -fx-border-radius: 6;
+    -fx-border-color: #3d4580;
+    -fx-border-width: 1;
+    -fx-control-inner-background: #0f1629;
+    -fx-text-fill: #e0e0e0;
+}
+
+ListView:focused {
+    -fx-border-color: #00d4ff;
+    -fx-border-width: 2;
+}
+
+/* TextFields */
+TextField {
+    -fx-font-size: 13;
+    -fx-padding: 12;
+    -fx-border-radius: 6;
+    -fx-border-color: #3d4580;
+    -fx-border-width: 1;
+    -fx-text-fill: #e0e0e0;
+    -fx-control-inner-background: #0f1629;
+    -fx-font-family: "Segoe UI", "Arial";
+    -fx-prompt-text-fill: #6b7280;
+}
+
+TextField:focused {
+    -fx-border-color: #00d4ff;
+    -fx-border-width: 2;
+    -fx-text-fill: #ffffff;
+}
+
+/* Buttons */
+Button {
+    -fx-padding: 10 20 10 20;
+    -fx-font-size: 13;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #0099ff;
+    -fx-border-radius: 6;
+    -fx-cursor: hand;
+    -fx-font-family: "Segoe UI", "Arial";
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+}
+
+Button:hover {
+    -fx-background-color: #0080d1;
+    -fx-effect: dropshadow(gaussian, rgba(0, 212, 255, 0.3), 10, 0.5, 0, 0);
+}
+
+Button:pressed {
+    -fx-background-color: #006ba8;
+}
+
+Button:focused {
+    -fx-border-color: #00d4ff;
+    -fx-border-width: 2;
+}
+
+/* Deposit Button Specific */
+.deposit_container VBox VBox Button {
+    -fx-padding: 12 30 12 30;
+    -fx-font-size: 14;
+    -fx-background-color: #00d984;
+}
+
+.deposit_container VBox VBox Button:hover {
+    -fx-background-color: #00b86a;
+    -fx-effect: dropshadow(gaussian, rgba(0, 217, 132, 0.4), 10, 0.5, 0, 0);
+}
+
+.deposit_container VBox VBox Button:pressed {
+    -fx-background-color: #009254;
+}
+
+/* FontAwesomeIconView */
+.glyph-icon {
+    -fx-fill: #ffffff;
+}
+
+/* HBox Styling */
+HBox {
+    -fx-spacing: 10;
+    -fx-padding: 10;
+}
+
+/* Inner VBox (Deposit Section) */
+VBox {
+    -fx-spacing: 12;
+    -fx-padding: 15;
+}
