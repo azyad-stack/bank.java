@@ -24,6 +24,7 @@ public class AdminController implements Initializable {
             // Example switch — you will customize this later
             switch (newVal) {
                 case CLIENTS -> admin_parent.setCenter(Model.getInstance().getViewFactory().getClientsView());
+                case DEPOSIT ->  admin_parent.setCenter(Model.getInstance().getViewFactory().getDepositsView());
                 case LOGOUT -> {
                     // Close current admin window
                     Stage stage = (Stage) admin_parent.getScene().getWindow();

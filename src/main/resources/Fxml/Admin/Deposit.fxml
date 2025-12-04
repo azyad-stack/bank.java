@@ -24,16 +24,14 @@
         </HBox>
         <ListView prefHeight="120.0" prefWidth="820.0"/>
         <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="315.0" prefWidth="100.0">
-            <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Deposit Section"/>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Amount"/>
-                <TextField/>
-                <Button mnemonicParsing="false" text="Deposit">
-                    <graphic>
-                        <FontAwesomeIconView glyphName="MONEY" size="20"/>
-                    </graphic>
-                </Button>
-            </children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Deposit Section"/>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Amount"/>
+            <TextField/>
+            <Button mnemonicParsing="false" text="Deposit">
+                <graphic>
+                    <FontAwesomeIconView glyphName="MONEY" size="20"/>
+                </graphic>
+            </Button>
         </VBox>
     </VBox>
 </AnchorPane>

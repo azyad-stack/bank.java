@@ -30,6 +30,11 @@ public class AdminMenuController implements Initializable {
         create_client_btn.setOnAction(event -> onCreateClient());
         clients_btn.setOnAction(event -> onClients());
         logout_btn.setOnAction(event -> onlogout());
+        deposit_client.setOnAction(event -> onDeposit());
+    }
+
+    private void onDeposit() {
+        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.DEPOSIT);
     }
 
     private void onlogout() {
