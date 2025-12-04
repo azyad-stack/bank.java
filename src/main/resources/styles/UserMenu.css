@@ -1,9 +1,11 @@
-.main_menu_container{
-    -fx-background-color: linear-gradient(to bottom right, #1e293b, #0f172a);
+/* Main Container - Deep modern background */
+.main_menu_container {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #0a0e1a, #1a1f35);
     -fx-background-position: center;
 }
 
-.left_container{
+/* Left Sidebar - Glassmorphism effect */
+.left_container {
     -fx-background-color: #1e293b;
     -fx-background-radius: 16;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 15, 0, 0, 4);
@@ -12,129 +14,161 @@
     -fx-border-radius: 16;
 }
 
-/* Title/logo Section */
-.title_container{
-    -fx-background-color: linear-gradient(to right, #4f46e5, #7c3aed);
+/* Title Section - Modern gradient with glow */
+.title_container {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #667eea 0%, #764ba2 50%, #f093fb 100%);
     -fx-background-radius: 16 16 0 0;
-    -fx-alignment: top_center;
-    -fx-padding: 20 10 20 10;
+    -fx-alignment: center;
+    -fx-padding: 16 10;
+    -fx-spacing: 8;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.5), 15, 0, 0, 5);
 }
 
-.title_container FontAwesomeIconView{
+.title_container FontAwesomeIconView {
     -fx-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 4, 0, 0, 2);
 }
 
 .title_container Text {
     -fx-fill: #ffffff;
-    -fx-font-size: 1.8em;
+    -fx-font-size: 1.1em;
     -fx-font-weight: bold;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 0, 1);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 4, 0, 0, 2);
 }
 
-/* Navigation Section */
-.menu_container{
-    -fx-padding: 20 20 20 20;
-    -fx-spacing: 12;
+/* Navigation Section - Sleek modern buttons */
+.menu_container {
+    -fx-padding: 16;
+    -fx-spacing: 10;
 }
 
-.menu_container Button{
-    -fx-pref-width: 180;
-    -fx-pref-height: 48;
-    -fx-background-color: transparent;
-    -fx-text-fill: #cbd5e1;
-    -fx-font-size: 1em;
-    -fx-font-weight: 500;
-    -fx-alignment: center-left;
-    -fx-padding: 0 0 0 20;
-    -fx-border-radius: 12;
-    -fx-background-radius: 12;
-    -fx-border-color: transparent;
-    -fx-border-width: 1;
-}
-
-.menu_container Button:hover{
-    -fx-cursor: hand;
-    -fx-background-color: #334155;
-    -fx-text-fill: #f1f5f9;
-    -fx-border-color: #475569;
-}
-
-.menu_container Button:pressed {
-    -fx-background-color: #475569;
-}
-
-.menu_container Button FontAwesomeIconView{
-    -fx-fill: #94a3b8;
-}
-
-.menu_container Button:hover FontAwesomeIconView {
-    -fx-fill: #e2e8f0;
-}
-
-.alt_menu_btn{
-    -fx-pref-width: 180;
-    -fx-pref-height: 48;
-    -fx-background-color: linear-gradient(to right, #6366f1, #8b5cf6);
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 1em;
+.menu_container Button {
+    -fx-pref-width: 168;
+    -fx-pref-height: 42;
+    -fx-background-color: rgba(51, 65, 85, 0.6);
+    -fx-text-fill: #e2e8f0;
+    -fx-font-size: 0.95em;
     -fx-font-weight: 600;
     -fx-alignment: center-left;
     -fx-padding: 0 0 0 20;
+    -fx-border-radius: 12;
     -fx-background-radius: 12;
-    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.5), 10, 0, 0, 2);
-}
-
-.alt_menu_btn:hover {
-    -fx-background-color: linear-gradient(to right, #7c3aed, #a855f7);
+    -fx-border-color: rgba(100, 116, 139, 0.3);
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 6, 0, 0, 2);
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.6), 12, 0, 0, 3);
 }
 
-.alt_menu_btn FontAwesomeIconView{
+.menu_container Button:hover {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, rgba(59,130,246,0.8), rgba(99,102,241,0.8));
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(59, 130, 246, 0.6), 12, 0, 0, 4);
+    -fx-border-color: rgba(147, 197, 253, 0.5);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.menu_container Button:pressed {
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+    -fx-effect: dropshadow(gaussian, rgba(59, 130, 246, 0.3), 4, 0, 0, 1);
+}
+
+.menu_container Button FontAwesomeIconView {
+    -fx-fill: #e2e8f0;
+}
+
+.menu_container Button:hover FontAwesomeIconView {
     -fx-fill: #ffffff;
 }
 
-/* Report Bug/Support */
+.menu_container Line {
+    -fx-stroke: rgba(148, 163, 184, 0.3);
+    -fx-stroke-width: 2;
+}
+
+/* Active Button - Vibrant accent color */
+.alt_menu_btn {
+    -fx-pref-width: 168;
+    -fx-pref-height: 42;
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #6366f1, #8b5cf6);
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 0.95em;
+    -fx-font-weight: 700;
+    -fx-alignment: center-left;
+    -fx-padding: 0 0 0 20;
+    -fx-background-radius: 12;
+    -fx-border-color: rgba(167, 139, 250, 0.5);
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.7), 14, 0, 0, 5);
+    -fx-cursor: hand;
+}
+
+.alt_menu_btn:hover {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #4f46e5, #7c3aed);
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.9), 18, 0, 0, 7);
+    -fx-border-color: rgba(167, 139, 250, 0.7);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+.alt_menu_btn FontAwesomeIconView {
+    -fx-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 3, 0, 0, 2);
+}
+
+/* Report Bug Section - Modern accent */
 .report_container {
-    -fx-background-color: #0f172a;
+    -fx-background-color: rgba(30, 41, 59, 0.5);
     -fx-background-radius: 12;
     -fx-alignment: center;
-    -fx-padding: 20 15 20 15;
+    -fx-padding: 20;
     -fx-spacing: 12;
-    -fx-border-color: #334155;
+    -fx-border-color: rgba(99, 102, 241, 0.25);
     -fx-border-width: 1;
     -fx-border-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 6, 0, 0, 2);
 }
 
 .report_container Label {
     -fx-text-alignment: center;
     -fx-wrap-text: true;
     -fx-text-fill: #cbd5e1;
-    -fx-font-size: 0.95em;
+    -fx-font-size: 0.9em;
     -fx-font-weight: 500;
 }
 
 .report_container Button {
-    -fx-pref-width: 140;
+    -fx-pref-width: 150;
     -fx-pref-height: 40;
-    -fx-background-color: #0ea5e9;
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #ec4899, #f472b6);
     -fx-text-fill: #ffffff;
-    -fx-background-radius: 10;
-    -fx-font-weight: 600;
+    -fx-background-radius: 12;
+    -fx-font-weight: 700;
     -fx-font-size: 0.95em;
-    -fx-effect: dropshadow(gaussian, rgba(14, 165, 233, 0.4), 8, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(236, 72, 153, 0.5), 10, 0, 0, 3);
+    -fx-cursor: hand;
+    -fx-border-color: rgba(249, 168, 212, 0.3);
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
 }
 
 .report_container Button:hover {
-    -fx-cursor: hand;
-    -fx-background-color: #38bdf8;
-    -fx-effect: dropshadow(gaussian, rgba(14, 165, 233, 0.6), 10, 0, 0, 3);
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #db2777, #ec4899);
+    -fx-effect: dropshadow(gaussian, rgba(236, 72, 153, 0.7), 14, 0, 0, 5);
+    -fx-scale-x: 1.04;
+    -fx-scale-y: 1.04;
+    -fx-border-color: rgba(249, 168, 212, 0.5);
 }
 
 .report_container Button:pressed {
-    -fx-background-color: #0284c7;
+    -fx-scale-x: 0.96;
+    -fx-scale-y: 0.96;
+    -fx-effect: dropshadow(gaussian, rgba(236, 72, 153, 0.4), 8, 0, 0, 2);
 }
 
 .report_container Button FontAwesomeIconView {
     -fx-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 3, 0, 0, 2);
 }

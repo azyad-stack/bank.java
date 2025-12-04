@@ -74,7 +74,7 @@
 }
 
 .account_gradient {
-    -fx-background-color: linear-gradient(135deg, #0891b2, #2563eb);
+    -fx-background-color: linear-gradient( 135deg, #0891b2, #2563eb);
 }
 
 .account_balance {
