@@ -1,0 +1,152 @@
+/* Modern Dark Theme CSS with Animations */
+
+@keyframes slideInUp {
+    from {
+        -fx-opacity: 0;
+        -fx-translate-y: 10;
+    }
+    to {
+        -fx-opacity: 1;
+        -fx-translate-y: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        -fx-opacity: 0;
+    }
+    to {
+        -fx-opacity: 1;
+    }
+}
+
+@keyframes shadowPulse {
+    0%, 100% {
+        -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 8, 0.15, 4, 6);
+    }
+    50% {
+        -fx-effect: dropshadow(three-pass-box, rgba(99, 102, 241, 0.3), 12, 0.2, 6, 8);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        -fx-scale-x: 0.95;
+        -fx-scale-y: 0.95;
+        -fx-opacity: 0;
+    }
+    to {
+        -fx-scale-x: 1;
+        -fx-scale-y: 1;
+        -fx-opacity: 1;
+    }
+}
+
+@keyframes buttonHoverGlow {
+    0%, 100% {
+        -fx-effect: dropshadow(three-pass-box, rgba(239, 68, 68, 0.3), 8, 0.15, 0, 0);
+    }
+    50% {
+        -fx-effect: dropshadow(three-pass-box, rgba(239, 68, 68, 0.6), 12, 0.2, 0, 0);
+    }
+}
+
+/* Cell Container */
+.cell_container {
+    -fx-background-color: #1A1F2E;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 8, 0.15, 4, 6);
+    -fx-padding: 12;
+    -fx-animation: slideInUp 0.5s ease-out;
+}
+
+.cell_container:hover {
+    -fx-background-color: #252D3D;
+    -fx-animation: shadowPulse 1.5s ease-in-out infinite;
+}
+
+/* Client Icon Container */
+.client_container {
+    -fx-fill: #6366F1;
+    -fx-animation: scaleIn 0.5s ease-out 0.1s backwards;
+}
+
+.cell_container:hover .client_container {
+    -fx-fill: #8B5CF6;
+}
+
+/* HBox with Labels */
+.label-container {
+    -fx-spacing: 12;
+}
+
+/* Client Full Name Labels */
+.client_fullname_lbl {
+    -fx-text-fill: #E8EAED;
+    -fx-font-weight: 700;
+    -fx-font-size: 14;
+    -fx-animation: fadeIn 0.6s ease-out 0.15s backwards;
+}
+
+.cell_container:hover .client_fullname_lbl {
+    -fx-text-fill: #FFFFFF;
+}
+
+/* Client Address Label */
+.client_pyeeaddress_lbl {
+    -fx-text-fill: #7C8AA6;
+    -fx-font-weight: 500;
+    -fx-font-size: 12;
+    -fx-animation: fadeIn 0.6s ease-out 0.2s backwards;
+}
+
+/* Client Number 2 Label */
+.client_svAccount_lbl {
+    -fx-text-fill: #7C8AA6;
+    -fx-font-weight: 500;
+    -fx-font-size: 11;
+    -fx-animation: fadeIn 0.6s ease-out 0.25s backwards;
+}
+
+/* Client Number Label */
+.client_ChAccount_lbl {
+    -fx-text-fill: #E8EAED;
+    -fx-font-weight: 600;
+    -fx-font-size: 12;
+    -fx-animation: fadeIn 0.6s ease-out 0.3s backwards;
+}
+
+/* Client Date Label */
+.client_date_lbl {
+    -fx-text-fill: #7C8AA6;
+    -fx-font-weight: 500;
+    -fx-font-size: 11;
+    -fx-animation: fadeIn 0.6s ease-out 0.35s backwards;
+}
+
+/* Delete Button */
+.client_delete_btn {
+    -fx-background-color: #EF4444;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 6;
+    -fx-padding: 6 12;
+    -fx-font-weight: 600;
+    -fx-font-size: 12;
+    -fx-cursor: hand;
+    -fx-border-width: 0;
+    -fx-animation: fadeIn 0.6s ease-out 0.4s backwards;
+}
+
+.client_delete_btn:hover {
+    -fx-background-color: #DC2626;
+    -fx-animation: buttonHoverGlow 1.5s ease-in-out infinite;
+}
+
+.client_delete_btn:pressed {
+    -fx-background-color: #991B1B;
+    -fx-padding: 6 12;
+}
+
+.client_delete_btn FontAwesomeIconView {
+    -fx-fill: #FFFFFF;
+}
