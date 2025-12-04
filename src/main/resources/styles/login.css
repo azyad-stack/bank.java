@@ -50,7 +50,7 @@
 }
 
 .account_selector .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-font-size: 1.05em;
 }
 

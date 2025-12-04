@@ -20,7 +20,7 @@
         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Balance:" />
         <Label fx:id="ch_acc_bal" text="3500.00 MAD" />
     </VBox>
-    <Text layoutX="30.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Savings Account" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="364.0" />
+    <Text layoutX="30.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Savings Account" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="370.0" />
     <VBox layoutX="24.0" layoutY="57.0" prefHeight="300.0" prefWidth="450.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="14.0">
         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Account Number:" />
         <Label fx:id="sv_acc_num" text="3452 4950 " />
