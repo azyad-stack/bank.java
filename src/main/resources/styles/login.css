@@ -2,122 +2,148 @@
    GLOBAL / LOGIN CONTAINER
 ---------------------------------------------------- */
 .login_container {
-    -fx-background-color: linear-gradient(to bottom right, #0f172a, #1e293b);
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #0f172a 0%, #1e293b 100%);
+    -fx-alignment: center;
 }
 
 /* ---------------------------------------------------
    LOGO CONTAINER
 ---------------------------------------------------- */
 .login_logo_container {
-    -fx-background-color: rgba(30,41,59,0.85);
+    -fx-background-color: rgba(30, 41, 59, 0.85);
     -fx-background-radius: 18;
+    -fx-padding: 30;
+    -fx-spacing: 18;
     -fx-alignment: center;
-    -fx-padding: 25;
-    -fx-spacing: 15;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 20, 0.1, 0, 8);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.40), 22, 0.15, 0, 10);
+    -fx-border-color: rgba(255,255,255,0.06);
+    -fx-border-radius: 18;
+    -fx-border-width: 1;
 }
 
 .login_logo_container Text {
-    -fx-font-size: 2.3em;
+    -fx-font-size: 2.4em;
     -fx-font-family: "Segoe UI", "Arial", sans-serif;
     -fx-font-weight: bold;
-    -fx-fill: white; /* Changed to white */
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.1, 0, 2);
+    -fx-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.1, 0, 2);
+    -fx-letter-spacing: 0.5px;
 }
 
 /* ---------------------------------------------------
    ACCOUNT SELECTOR / CHOICE BOX
 ---------------------------------------------------- */
 .account_selector {
-    -fx-background-color: rgba(15,23,42,0.85);
-    -fx-background-radius: 8;
-    -fx-border-radius: 8;
-    -fx-border-color: rgba(148,163,184,0.3);
+    -fx-background-color: rgba(15, 23, 42, 0.85);
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: rgba(148,163,184,0.35);
     -fx-border-width: 1;
-    -fx-text-fill: white; /* Changed to white */
+    -fx-text-fill: white;
     -fx-font-family: "Segoe UI", "Arial", sans-serif;
-    -fx-font-size: 1em;
+    -fx-font-size: 1.05em;
+    -fx-padding: 6 10;
+}
+
+.account_selector:hover {
+    -fx-border-color: #06b6d4;
 }
 
 .account_selector .label {
-    -fx-text-fill: white; /* Changed to white */
-    -fx-font-size: 1em;
+    -fx-text-fill: white;
+    -fx-font-size: 1.05em;
 }
 
 /* ---------------------------------------------------
    LOGIN FORM
 ---------------------------------------------------- */
 .login_form_container {
-    -fx-spacing: 15;
+    -fx-spacing: 18;
     -fx-alignment: top_left;
-    -fx-padding: 20;
-    -fx-background-color: rgba(30,41,59,0.85);
-    -fx-background-radius: 16;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 20, 0.1, 0, 6);
+    -fx-padding: 25;
+    -fx-background-color: rgba(30, 41, 59, 0.85);
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: rgba(255,255,255,0.06);
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.30), 25, 0.15, 0, 8);
 }
 
 .login_form_container Label {
-    -fx-font-size: 1.2em;
+    -fx-font-size: 1.25em;
     -fx-font-family: "Segoe UI", "Arial", sans-serif;
-    -fx-font-weight: bold;
-    -fx-text-fill: white; /* Changed to white */
+    -fx-font-weight: 700;
+    -fx-text-fill: white;
 }
 
+/* ChoiceBox prompt inside form */
 #choice-prompt-text {
     -fx-font-weight: 600;
     -fx-font-size: 1.2em;
-    -fx-text-fill: white; /* Changed to white */
+    -fx-text-fill: white;
 }
 
 /* ---------------------------------------------------
    INPUT FIELDS
 ---------------------------------------------------- */
 .input_field {
-    -fx-background-color: rgba(15,23,42,0.85);
-    -fx-background-radius: 8;
-    -fx-border-radius: 8;
-    -fx-border-color: rgba(148,163,184,0.3);
+    -fx-background-color: rgba(15, 23, 42, 0.85);
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: rgba(148,163,184,0.35);
     -fx-border-width: 1;
-    -fx-text-fill: white; /* Changed to white */
-    -fx-font-size: 1em;
-    -fx-padding: 10 15;
+    -fx-text-fill: white;
+    -fx-font-size: 1.05em;
+    -fx-padding: 12 16;
     -fx-font-family: "Segoe UI", "Arial", sans-serif;
 }
 
 .input_field .prompt-text {
-    -fx-text-fill: #94a3b8; /* Keep placeholder text lighter gray */
+    -fx-text-fill: #94a3b8;
 }
 
 .input_field:focused {
     -fx-border-color: #06b6d4;
     -fx-border-width: 2;
-    -fx-background-color: rgba(15,23,42,0.95);
+    -fx-background-color: rgba(15, 23, 42, 0.95);
+    -fx-effect: dropshadow(gaussian, rgba(6,182,212,0.25), 15, 0.2, 0, 2);
 }
 
 /* ---------------------------------------------------
    LOGIN BUTTON
 ---------------------------------------------------- */
 .login_form_container Button {
-    -fx-background-color: #2563eb;
-    -fx-background-radius: 8;
+    -fx-background-color: linear-gradient(from 0% 100% to 100% 0%, #2563eb 0%, #3b82f6 100%);
+    -fx-background-radius: 10;
     -fx-pref-width: 320;
-    -fx-pref-height: 44;
+    -fx-pref-height: 46;
     -fx-font-family: "Segoe UI", "Arial", sans-serif;
-    -fx-font-size: 16px;
+    -fx-font-size: 17px;
     -fx-font-weight: bold;
-    -fx-text-fill: white; /* Already white */
+    -fx-text-fill: white;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(37, 99, 235, 0.3), 4, 0, 0, 1);
+    -fx-effect: dropshadow(gaussian, rgba(37, 99, 235, 0.35), 6, 0.2, 0, 2);
+    -fx-border-radius: 10;
+}
+
+.login_form_container Button:hover {
+    -fx-background-color: linear-gradient(from 0% 100% to 100% 0%, #1d4ed8 0%, #3b82f6 100%);
+    -fx-effect: dropshadow(gaussian, rgba(37, 99, 235, 0.45), 10, 0.25, 0, 3);
+}
+
+.login_form_container Button:pressed {
+    -fx-background-color: #1e40af;
+    -fx-effect: none;
 }
 
 /* ---------------------------------------------------
-   ERROR LABEL (stays red)
+   ERROR LABEL
 ---------------------------------------------------- */
 .error_lbl {
-    -fx-text-fill: #dc2626; /* Kept red for errors */
+    -fx-text-fill: #dc2626;
     -fx-font-weight: 600;
     -fx-font-family: "Segoe UI", "Arial", sans-serif;
-    -fx-font-size: 14px;
+    -fx-font-size: 14.5px;
     -fx-padding: 8 0;
     -fx-alignment: center;
     -fx-wrap-text: true;
