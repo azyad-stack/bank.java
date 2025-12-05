@@ -6,21 +6,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-
-<AnchorPane prefHeight="50.0" prefWidth="750.0" styleClass="cell_container" stylesheets="@../../styles/ClientsCell.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafxapp.Controllers.Admin.ClientsCellController">
+<AnchorPane prefHeight="50.0" prefWidth="750.0" styleClass="cell_container" stylesheets="@../../styles/ClientsCell.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <FontAwesomeIconView glyphName="USER" layoutX="8.0" layoutY="29.0" size="20" styleClass="client_container" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
       <HBox alignment="CENTER" layoutX="135.0" layoutY="-25.0" prefHeight="40.0" prefWidth="432.0" styleClass="label-container" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="5.0">
          <children>
             <Label fx:id="name_lbl" styleClass="client_fullname_lbl" text="ANAS" />
             <Label fx:id="lastname_lbl" styleClass="client_fullname_lbl" text="ZYAD" />
-            <Label fx:id="payeeAddress_lbl" styleClass="client_pyeeaddress_lbl" text="PAddress" />
-            <Label fx:id="ch_account_lbl" styleClass="client_number2_lbl" text="123173284832748" />
-            <Label fx:id="sv_account_lbl" styleClass="client_number_lbl" text="213432332" />
+            <Label fx:id="payeeAddress_lbl" styleClass="client_pyeeaddress_lbl" text="PAddress" textFill="#fffdfd" />
+            <Label fx:id="ch_account_lbl" styleClass="client_number2_lbl" text="123173284832748" textFill="#f6f1f1" />
+            <Label fx:id="sv_account_lbl" styleClass="client_number_lbl" text="213432332" textFill="#edeaea" />
             <Label fx:id="date_lbl" styleClass="client_date_lbl" text="2025-12-12" />
          </children>
       </HBox>
-      <Button fx:id="dlete_btn" layoutX="684.0" layoutY="12.0" mnemonicParsing="false" styleClass="client_delete_btn" text="Delete" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Button fx:id="dlete_btn" layoutX="684.0" layoutY="12.0" mnemonicParsing="false" styleClass="client_delete_btn" text="Delete" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="8.0">
          <graphic>
             <FontAwesomeIconView glyphName="WINDOW_CLOSE_ALT" size="20" />
          </graphic>

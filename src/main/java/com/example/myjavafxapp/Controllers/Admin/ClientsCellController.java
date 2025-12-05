@@ -1,5 +1,6 @@
 package com.example.myjavafxapp.Controllers.Admin;
 
+import com.example.myjavafxapp.Models.Client;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
@@ -14,6 +15,12 @@ public class ClientsCellController implements Initializable {
     public Label sv_account_lbl;
     public Label date_lbl;
     public Label payeeAddress_lbl;
+
+    private final Client client;
+
+    public ClientsCellController(Client client) {
+        this.client = client;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

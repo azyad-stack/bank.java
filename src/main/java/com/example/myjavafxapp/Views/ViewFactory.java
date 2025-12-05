@@ -6,10 +6,9 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class ViewFactory {
     private AccountType loginAccountType;
@@ -147,7 +146,7 @@ public class ViewFactory {
 
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.setTitle(title);
+        stage.setTitle("Gadz'Art Bank");
         stage.show();
     }
 

@@ -1,5 +1,6 @@
 package com.example.myjavafxapp.Controllers.User;
 
+import com.example.myjavafxapp.Models.Transaction;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -14,6 +15,12 @@ public class TransactionsCellController implements Initializable {
     public Label sender_trans_lbl;
     public Label reciever_trans_lbl;
     public Label amount_trans_lbl;
+
+    private final Transaction transaction;
+
+    public TransactionsCellController(Transaction transaction) {
+        this.transaction = transaction;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
