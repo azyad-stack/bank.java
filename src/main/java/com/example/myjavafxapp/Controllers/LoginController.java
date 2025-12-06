@@ -1,4 +1,4 @@
-package com.example.myjavafxapp.Controllers; // Ensure this matches your directory structure
+package com.example.myjavafxapp.Controllers;
 
 import com.example.myjavafxapp.Models.Model;
 import com.example.myjavafxapp.Views.AccountType;
@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
 
     @FXML
-    public ChoiceBox<AccountType> acc_selector; // Added <String> generic for safety
+    public ChoiceBox<AccountType> acc_selector;
     @FXML
     public TextField payee_adress_fill;
     @FXML
@@ -44,30 +44,43 @@ public class LoginController implements Initializable {
         // Validate inputs first
         if (payee_adress_fill.getText().trim().isEmpty() || password_fill.getText().trim().isEmpty()) {
             error_lbl.setText("Please enter both username and password!");
-            return;  // Don't close window, just return
+            return;
         }
 
         if (Model.getInstance().getViewFactory().getLoginAccountType() == AccountType.CLIENT) {
-            // Evaluate Client Login Credentials
+
+            // CLIENT LOGIN
             Model.getInstance().evaluateClientCred(payee_adress_fill.getText(), password_fill.getText());
 
             if (Model.getInstance().getClientLoginSuccessFlag()) {
-                // ✅ SUCCESS - Now close the window and open client window
                 Stage stage = (Stage) error_lbl.getScene().getWindow();
                 Model.getInstance().getViewFactory().showClientWindow();
                 Model.getInstance().getViewFactory().closeStage(stage);
             } else {
-                // ❌ FAILED - Keep window open and show error
                 payee_adress_fill.setText("");
                 password_fill.setText("");
                 error_lbl.setText("Error! Incorrect username or password!");
             }
-        } else {
-            // ADMIN LOGIN - you can add authentication here later
 
-            Stage stage = (Stage) error_lbl.getScene().getWindow();
-            Model.getInstance().getViewFactory().showAdminWindow();
-            Model.getInstance().getViewFactory().closeStage(stage);
+        } else {
+
+            // ===============================
+            // ⭐ ADMIN LOGIN SECTION ⭐
+            // ===============================
+
+            Model.getInstance().evaluateAdminCred(payee_adress_fill.getText(), password_fill.getText());
+
+            if (Model.getInstance().getAdminLoginSuccessFlag()) {
+                // SUCCESS → Open admin panel
+                Stage stage = (Stage) error_lbl.getScene().getWindow();
+                Model.getInstance().getViewFactory().showAdminWindow();
+                Model.getInstance().getViewFactory().closeStage(stage);
+            } else {
+                // FAILED → Stay on login
+                payee_adress_fill.setText("");
+                password_fill.setText("");
+                error_lbl.setText("Error! Incorrect username or password!");
+            }
         }
     }
 }
