@@ -34,15 +34,25 @@ public class LoginController implements Initializable {
         acc_selector.setItems(FXCollections.observableArrayList(AccountType.CLIENT, AccountType.ADMIN));
         acc_selector.setValue(Model.getInstance().getViewFactory().getLoginAccountType());
         acc_selector.valueProperty().addListener(observable -> Model.getInstance().getViewFactory().setLoginAccountType(acc_selector.getValue()));
-        login_btn.setOnAction(event  -> onLogin());
+        login_btn.setOnAction(event -> onLogin());
     }
 
     private void onLogin() {
-        Stage  stage = (Stage) error_lbl.getScene().getWindow();
+        Stage stage = (Stage) error_lbl.getScene().getWindow();
         Model.getInstance().getViewFactory().closeStage(stage);
         if (Model.getInstance().getViewFactory().getLoginAccountType() == AccountType.CLIENT) {
-            Model.getInstance().getViewFactory().showClientWindow();
-        }else{
+            // Evaluate Client Login Credentials
+            Model.getInstance().evaluateClientCred(payee_adress_fill.getText(), password_fill.getText());
+            if (Model.getInstance().getClientLoginSuccessFlag()) {
+                Model.getInstance().getViewFactory().showClientWindow();
+                //Close the Login Stage
+                Model.getInstance().getViewFactory().closeStage(stage);
+            } else {
+                payee_adress_fill.setText("");
+                password_fill.setText("");
+                error_lbl.setText("Error! Incorrect username or password!");
+            }
+        } else {
             Model.getInstance().getViewFactory().showAdminWindow();
         }
 
