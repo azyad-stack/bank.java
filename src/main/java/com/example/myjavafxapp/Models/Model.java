@@ -18,13 +18,15 @@ public class Model {
     private final Client client;
     private boolean clientLoginSuccessFlag;
 
+    //Admin Data Section
+    private boolean adminLoginSuccessFlag;
 
     private Model() {
         this.viewFactory = new ViewFactory();
         this.databaseDriver = new DatabaseDriver();
         //Client Data section
         this.clientLoginSuccessFlag = false;
-        this.client = new Client("","","",null,null,null);
+        this.client = new Client("", "", "", null, null, null);
     }
 
     public static synchronized Model getInstance() {
@@ -38,7 +40,9 @@ public class Model {
         return viewFactory;
     }
 
-    public DatabaseDriver getDatabaseDriver() {return databaseDriver;}
+    public DatabaseDriver getDatabaseDriver() {
+        return databaseDriver;
+    }
 
     public AccountType getLoginAccountType() {
         return loginAccountType;
@@ -49,21 +53,27 @@ public class Model {
     }
 
     /*
-    *Client Method Section
+     *Client Method Section
      */
 
-    public boolean getClientLoginSuccessFlag() {return this.clientLoginSuccessFlag;}
+    public boolean getClientLoginSuccessFlag() {
+        return this.clientLoginSuccessFlag;
+    }
 
-    public void setClientLoginSuccessFlag(boolean flag) {this.clientLoginSuccessFlag = flag;}
+    public void setClientLoginSuccessFlag(boolean flag) {
+        this.clientLoginSuccessFlag = flag;
+    }
 
-    public Client getClient() {return client;}
+    public Client getClient() {
+        return client;
+    }
 
-    public void evaluateClientCred(String pAddress, String password){
+    public void evaluateClientCred(String pAddress, String password) {
         CheckingAccount checkingAccount = null;
         SavingsAccount savingsAccount = null;
         ResultSet resultSet = databaseDriver.getClientData(pAddress, password);
 
-        try{
+        try {
             if (resultSet != null && resultSet.isBeforeFirst()) {
                 resultSet.next();  // ✅ ADD THIS LINE - Move cursor to first row!
 
@@ -81,10 +91,40 @@ public class Model {
                 this.clientLoginSuccessFlag = false;
                 System.out.println("❌ Login failed - no matching credentials");
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             this.clientLoginSuccessFlag = false;
         }
     }
 
+    /*
+     *Admin Method Section
+     */
+
+    /**
+     * Evaluate admin credentials from database
+     */
+    public boolean getAdminLoginSuccessFlag() {
+        return this.adminLoginSuccessFlag;
+    }
+
+    public void setAdminLoginSuccessFlag(boolean flag) {this.adminLoginSuccessFlag = flag;}
+
+    public void evaluateAdminCred(String Username, String Password) {
+        ResultSet resultSet = databaseDriver.getAdminData(Username, Password);
+
+        try {
+            if (resultSet != null && resultSet.isBeforeFirst()) {
+                resultSet.next();  // Move to first row
+                this.adminLoginSuccessFlag = true;
+                System.out.println("✅ Admin login successful: " + Username);
+            } else {
+                this.adminLoginSuccessFlag = false;
+                System.out.println("❌ Admin login failed: Invalid credentials");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            this.adminLoginSuccessFlag = false;
+        }
+    }
 }

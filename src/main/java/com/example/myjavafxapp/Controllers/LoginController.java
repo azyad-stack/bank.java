@@ -64,6 +64,7 @@ public class LoginController implements Initializable {
             }
         } else {
             // ADMIN LOGIN - you can add authentication here later
+
             Stage stage = (Stage) error_lbl.getScene().getWindow();
             Model.getInstance().getViewFactory().showAdminWindow();
             Model.getInstance().getViewFactory().closeStage(stage);
