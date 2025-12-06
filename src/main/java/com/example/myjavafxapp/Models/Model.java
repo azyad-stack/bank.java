@@ -59,21 +59,31 @@ public class Model {
     public Client getClient() {return client;}
 
     public void evaluateClientCred(String pAddress, String password){
-        CheckingAccount checkingAccount;
-        SavingsAccount savingsAccount;
-        ResultSet resultSet = databaseDriver.getClientData(pAddress,password);
+        CheckingAccount checkingAccount = null;
+        SavingsAccount savingsAccount = null;
+        ResultSet resultSet = databaseDriver.getClientData(pAddress, password);
+
         try{
-            if (resultSet.isBeforeFirst()) {
-               this.client.FirstNameProperty().set(resultSet.getString("FirstName"));
-               this.client.LastNameProperty().set(resultSet.getString("LastName"));
-               this.client.PayeeAddressProperty().set(resultSet.getString("PayeeAddress"));
-               String[] dateParts =  resultSet.getString("Date").split("-");
-               LocalDate date = LocalDate.of(Integer.parseInt(dateParts[0]), Integer.parseInt(dateParts[1]), Integer.parseInt(dateParts[2]));
-               this.client.DateCreatedProperty().set(date);
-               this.clientLoginSuccessFlag = true;
+            if (resultSet != null && resultSet.isBeforeFirst()) {
+                resultSet.next();  // ✅ ADD THIS LINE - Move cursor to first row!
+
+                this.client.FirstNameProperty().set(resultSet.getString("FirstName"));
+                this.client.LastNameProperty().set(resultSet.getString("LastName"));
+                this.client.PayeeAddressProperty().set(resultSet.getString("PayeeAddress"));
+
+                String[] dateParts = resultSet.getString("Date").split("-");
+                LocalDate date = LocalDate.of(Integer.parseInt(dateParts[0]), Integer.parseInt(dateParts[1]), Integer.parseInt(dateParts[2]));
+                this.client.DateCreatedProperty().set(date);
+
+                this.clientLoginSuccessFlag = true;
+                System.out.println("✅ Login successful!");
+            } else {
+                this.clientLoginSuccessFlag = false;
+                System.out.println("❌ Login failed - no matching credentials");
             }
         }catch(Exception e){
             e.printStackTrace();
+            this.clientLoginSuccessFlag = false;
         }
     }
 

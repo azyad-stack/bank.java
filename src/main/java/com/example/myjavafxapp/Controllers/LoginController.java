@@ -38,23 +38,35 @@ public class LoginController implements Initializable {
     }
 
     private void onLogin() {
-        Stage stage = (Stage) error_lbl.getScene().getWindow();
-        Model.getInstance().getViewFactory().closeStage(stage);
+        // Clear any previous error
+        error_lbl.setText("");
+
+        // Validate inputs first
+        if (payee_adress_fill.getText().trim().isEmpty() || password_fill.getText().trim().isEmpty()) {
+            error_lbl.setText("Please enter both username and password!");
+            return;  // Don't close window, just return
+        }
+
         if (Model.getInstance().getViewFactory().getLoginAccountType() == AccountType.CLIENT) {
             // Evaluate Client Login Credentials
             Model.getInstance().evaluateClientCred(payee_adress_fill.getText(), password_fill.getText());
+
             if (Model.getInstance().getClientLoginSuccessFlag()) {
+                // ✅ SUCCESS - Now close the window and open client window
+                Stage stage = (Stage) error_lbl.getScene().getWindow();
                 Model.getInstance().getViewFactory().showClientWindow();
-                //Close the Login Stage
                 Model.getInstance().getViewFactory().closeStage(stage);
             } else {
+                // ❌ FAILED - Keep window open and show error
                 payee_adress_fill.setText("");
                 password_fill.setText("");
                 error_lbl.setText("Error! Incorrect username or password!");
             }
         } else {
+            // ADMIN LOGIN - you can add authentication here later
+            Stage stage = (Stage) error_lbl.getScene().getWindow();
             Model.getInstance().getViewFactory().showAdminWindow();
+            Model.getInstance().getViewFactory().closeStage(stage);
         }
-
     }
 }
