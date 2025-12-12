@@ -1,6 +1,8 @@
 package com.example.myjavafxapp.Views;
 
 import com.example.myjavafxapp.Controllers.Admin.AdminController;
+import com.example.myjavafxapp.Controllers.Admin.ClientsController;
+import com.example.myjavafxapp.Controllers.User.DashboardController;
 import com.example.myjavafxapp.Controllers.User.UserController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -17,12 +19,14 @@ public class ViewFactory {
     private AnchorPane dashboardView;
     private AnchorPane transactionView;
     private AnchorPane accountsView;
+    private DashboardController dashboardController;
 
     // Admin Views
     private final ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
     private AnchorPane createUserView;
     private AnchorPane clientsView;
     private AnchorPane depositsView;
+    private ClientsController clientsController;
 
     public ViewFactory() {
         this.loginAccountType = AccountType.CLIENT;
@@ -48,10 +52,16 @@ public class ViewFactory {
     public AnchorPane getDashboardView() {
         if(dashboardView == null) {
             try {
-                dashboardView = new FXMLLoader(getClass().getResource("/Fxml/User/Dashboard.fxml")).load();
-
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/User/Dashboard.fxml"));
+                dashboardView = loader.load();
+                dashboardController = loader.getController();
             }catch (Exception e){
                 e.printStackTrace();
+            }
+        } else {
+            // Refresh dashboard data when view is accessed
+            if (dashboardController != null) {
+                dashboardController.loadDashboardData();
             }
         }
         return dashboardView;
@@ -94,26 +104,41 @@ public class ViewFactory {
     public ObjectProperty<AdminMenuOptions> getAdminSelectedMenuItem () {
         return adminSelectedMenuItem;
     }
-   public AnchorPane getDepositsView() {
+    public AnchorPane getDepositsView() {
         if(depositsView == null) {
             try {
                 depositsView = new FXMLLoader(getClass().getResource("/Fxml/Admin/Deposit.fxml")).load();
             } catch (Exception e) {
-               e.printStackTrace();
+                e.printStackTrace();
             }
         }
         return depositsView;
-   }
+    }
 
     public AnchorPane getClientsView() {
         if(clientsView == null) {
             try {
-                clientsView = new FXMLLoader(getClass().getResource("/Fxml/Admin/Clients.fxml")).load();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Admin/Clients.fxml"));
+                clientsView = loader.load();
+                clientsController = loader.getController();
             }catch (Exception e){
                 e.printStackTrace();
             }
+        } else {
+            // Refresh the clients list when view is accessed
+            if (clientsController != null) {
+                clientsController.loadClients();
+            }
         }
         return clientsView;
+    }
+
+    /**
+     * Get the ClientsController instance
+     * @return ClientsController instance or null if not loaded
+     */
+    public ClientsController getClientsController() {
+        return clientsController;
     }
     public AnchorPane getCreateUserView() {
         if(createUserView == null) {

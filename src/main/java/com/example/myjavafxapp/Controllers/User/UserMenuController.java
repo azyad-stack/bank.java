@@ -26,6 +26,11 @@ public class UserMenuController implements Initializable {
         dashboard_btn.setOnAction(event -> onDashboard());
         transactions_btn.setOnAction(event -> onTransactions());
         accounts_btn.setOnAction(event -> onAccounts());
+        logout_btn.setOnAction(event -> onLogout());
+    }
+
+    private void onLogout() {
+        Model.getInstance().getViewFactory().getUserSelectedMenuItem().set(UserMenuOptions.LOGOUT);
     }
 
     private void onAccounts() {

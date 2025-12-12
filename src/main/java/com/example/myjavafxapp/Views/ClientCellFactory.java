@@ -6,6 +6,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListCell;
 
 public class ClientCellFactory extends ListCell<Client> {
+    private Runnable onDeleteCallback;
+
+    public ClientCellFactory() {
+        this.onDeleteCallback = null;
+    }
+
+    public ClientCellFactory(Runnable onDeleteCallback) {
+        this.onDeleteCallback = onDeleteCallback;
+    }
+
     @Override
     protected void updateItem(Client client, boolean empty) {
         super.updateItem(client, empty);
@@ -13,8 +23,8 @@ public class ClientCellFactory extends ListCell<Client> {
             setText(null);
             setGraphic(null);
         }else{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ClientCell.fxml"));
-            ClientsCellController controller = new ClientsCellController(client);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Admin/ClientsCell.fxml"));
+            ClientsCellController controller = new ClientsCellController(client, onDeleteCallback);
             loader.setController(controller);
             setText(null);
             try {
