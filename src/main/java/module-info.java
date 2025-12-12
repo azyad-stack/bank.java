@@ -6,6 +6,7 @@ module com.example.myjavafxapp {
     requires java.naming; // Required for SQLite JDBC
     requires org.xerial.sqlitejdbc; // SQLite JDBC
     requires com.dlsc.formsfx;
+    requires javafx.base;
 
     // Open packages to javafx.fxml for reflection (FXML injection)
     opens com.example.myjavafxapp to javafx.fxml;
