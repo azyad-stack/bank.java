@@ -14,7 +14,7 @@
         <HBox alignment="CENTER" prefHeight="70.0" prefWidth="820.0">
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Search by Payee Address" />
             <TextField fx:id="pAddress_fld" styleClass="search_box" />
-            <Button mnemonicParsing="false" text="Button">
+            <Button mnemonicParsing="false" text="Search">
                 <graphic>
                     <FontAwesomeIconView fx:id="PaddressSearch_btn" glyphName="SEARCH" />
                 </graphic>
@@ -27,7 +27,7 @@
             <TextField fx:id="Amount_fld" />
             <Button fx:id="Deposit_btn" mnemonicParsing="false" text="Deposit">
                 <graphic>
-                    <FontAwesomeIconView glyphName="MONEY" size="20" />
+                    <FontAwesomeIconView glyphName="SEND" size="20" />
                 </graphic>
             </Button>
         </VBox>
