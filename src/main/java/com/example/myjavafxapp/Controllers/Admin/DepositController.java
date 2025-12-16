@@ -38,7 +38,36 @@ public class DepositController implements Initializable {
 
     private void addListeners() {
         PaddressSearch_btn.setOnAction(event -> onPaddressSearch());
+        Deposit_btn.setOnAction(event -> onDeposit());
+    }
 
+    private void onDeposit() {
+        String address = pAddress_fld.getText().trim();
+        String amountText = Amount_fld.getText().trim();
+
+        try {
+            double amount = Double.parseDouble(amountText);
+
+            if (amount <= 0) {
+                error_lbl.setText("Amount must be positive!");
+                error_lbl.setTextFill(Color.RED);
+                return;
+            }
+
+            boolean success = Model.getInstance().getDatabaseDriver()
+                    .depositToCheckingAccount(address, amount);
+
+            if (success) {
+                error_lbl.setText("Deposit successful!");
+                error_lbl.setTextFill(Color.GREEN);
+            } else {
+                error_lbl.setText("Deposit failed!");
+                error_lbl.setTextFill(Color.RED);
+            }
+        } catch (NumberFormatException e) {
+            error_lbl.setText("Invalid amount!");
+            error_lbl.setTextFill(Color.RED);
+        }
     }
 
     private Object onPaddressSearch() {

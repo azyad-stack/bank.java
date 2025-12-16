@@ -320,4 +320,19 @@ public class DatabaseDriver {
            return null;
        }
    }
+   //Deposit
+   public boolean depositToCheckingAccount(String payeeAddress, double amount) {
+       String query = "UPDATE CheckingAccounts SET Balance = Balance + ? WHERE Owner = ?";
+       try {
+           PreparedStatement preparedStatement = this.connection.prepareStatement(query);
+           preparedStatement.setDouble(1, amount);
+           preparedStatement.setString(2, payeeAddress);
+
+           int rowsAffected = preparedStatement.executeUpdate();
+           return rowsAffected > 0;
+       } catch (SQLException e) {
+           e.printStackTrace();
+           return false;
+       }
+   }
 }

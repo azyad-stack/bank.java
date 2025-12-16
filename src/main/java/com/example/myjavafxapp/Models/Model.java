@@ -597,7 +597,7 @@ public class Model {
         }
     }
 
-
+   //Model Search for client
     public boolean SearchClient(String address) {
         LastSearchErrorMessage = "";
         if (address == null || address.isEmpty()) {
@@ -640,5 +640,15 @@ public class Model {
         }
 
         return clients;
+    }
+    //Deposit
+    public boolean DepositAmount(Double Amount,String payeeAddress) {
+        if (Amount != null) {
+            if (!databaseDriver.depositToCheckingAccount(payeeAddress, Amount)) {
+                return false;
+            }
+        }
+
+      return true;
     }
 }
