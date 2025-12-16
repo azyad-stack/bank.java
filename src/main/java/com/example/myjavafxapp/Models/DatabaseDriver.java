@@ -129,18 +129,15 @@ public class DatabaseDriver {
      * @param accountNumber Unique account number
      * @param balance Initial balance
      * @param transactionLimit Transaction limit per day
-     * @param dateCreated Date when account was created
      * @return true if successful, false otherwise
      */
-    public boolean createCheckingAccount(String owner, String accountNumber, double balance, int transactionLimit, LocalDate dateCreated) {
-        String query = "INSERT INTO CheckingAccounts (Owner, AccountNumber, Balance, TransactionLimit, DateCreated) VALUES (?, ?, ?, ?, ?)";
+    public boolean createCheckingAccount(String owner, String accountNumber, double balance, int transactionLimit) {
+        String query = "INSERT INTO CheckingAccounts (Owner, AccountNumber, TransactionLimit, Balance) VALUES (?, ?, ?, ?)";
         try (PreparedStatement statement = this.connection.prepareStatement(query)) {
             statement.setString(1, owner);
             statement.setString(2, accountNumber);
             statement.setDouble(3, balance);
             statement.setInt(4, transactionLimit);
-            statement.setString(5, dateCreated.format(DateTimeFormatter.ISO_DATE));
-
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {
@@ -154,18 +151,14 @@ public class DatabaseDriver {
      * @param owner PayeeAddress of the account owner
      * @param accountNumber Unique account number
      * @param balance Initial balance
-     * @param withdrawalLimit Withdrawal limit
-     * @param dateCreated Date when account was created
      * @return true if successful, false otherwise
      */
-    public boolean createSavingsAccount(String owner, String accountNumber, double balance, double withdrawalLimit, LocalDate dateCreated) {
-        String query = "INSERT INTO SavingsAccounts (Owner, AccountNumber, Balance, WithdrawalLimit, DateCreated) VALUES (?, ?, ?, ?, ?)";
+    public boolean createSavingsAccount(String owner, String accountNumber, double balance) {
+        String query = "INSERT INTO SavingsAccounts (Owner, AccountNumber, Balance) VALUES (?, ?, ?)";
         try (PreparedStatement statement = this.connection.prepareStatement(query)) {
             statement.setString(1, owner);
             statement.setString(2, accountNumber);
             statement.setDouble(3, balance);
-            statement.setDouble(4, withdrawalLimit);
-            statement.setString(5, dateCreated.format(DateTimeFormatter.ISO_DATE));
 
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;

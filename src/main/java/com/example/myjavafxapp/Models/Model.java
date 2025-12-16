@@ -339,7 +339,7 @@ public class Model {
             String checkingAccountNumber = databaseDriver.generateAccountNumber("CHK");
             int defaultTransactionLimit = 10; // Default transaction limit
             if (!databaseDriver.createCheckingAccount(payeeAddress, checkingAccountNumber,
-                    checkingBalance, defaultTransactionLimit, currentDate)) {
+                    checkingBalance, defaultTransactionLimit)) {
                 lastErrorMessage = "Client created but failed to create checking account.";
                 return false;
             }
@@ -350,7 +350,7 @@ public class Model {
             String savingsAccountNumber = databaseDriver.generateAccountNumber("SAV");
             double defaultWithdrawalLimit = 1000.0; // Default withdrawal limit
             if (!databaseDriver.createSavingsAccount(payeeAddress, savingsAccountNumber,
-                    savingsBalance, defaultWithdrawalLimit, currentDate)) {
+                    savingsBalance)) {
                 lastErrorMessage = "Client created but failed to create savings account.";
                 return false;
             }
