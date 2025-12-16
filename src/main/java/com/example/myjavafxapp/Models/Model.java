@@ -106,7 +106,7 @@ public class Model {
                         withdrawalLimit = 1000.0; // Default fallback
                     }
                 }
-                savingsAccount = new SavingsAccount(payeeAddress, accountNumber, balance, withdrawalLimit);
+                savingsAccount = new SavingsAccount(payeeAddress, accountNumber, balance);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -183,23 +183,7 @@ public class Model {
 
                         String accountNumber = savingsResultSet.getString("AccountNumber");
                         double balance = savingsResultSet.getDouble("Balance");
-                        double withdrawalLimit = 0.0;
-
-                        try {
-                            withdrawalLimit = savingsResultSet.getDouble("WithdrawalLimit");
-                        } catch (Exception e) {
-                            try {
-                                withdrawalLimit = savingsResultSet.getDouble("WithdrawLimit");
-                            } catch (Exception e2) {
-                                withdrawalLimit = 1000.0; // Default
-                            }
-                        }
-
-                        System.out.println("  Account Number: " + accountNumber);
-                        System.out.println("  Balance: " + balance);
-                        System.out.println("  Withdrawal Limit: " + withdrawalLimit);
-
-                        savingsAccount = new SavingsAccount(pAddress, accountNumber, balance, withdrawalLimit);
+                        savingsAccount = new SavingsAccount(pAddress, accountNumber, balance);
                         System.out.println("✓ SavingsAccount object created");
                         System.out.println("  Object Balance Property: " + savingsAccount.BalanceProperty().get());
                     } else {
@@ -412,17 +396,7 @@ public class Model {
                         String accountNumber = savingsResultSet.getString("AccountNumber");
                         double balance = savingsResultSet.getDouble("Balance");
                         // Try both possible column names
-                        double withdrawalLimit = 0.0;
-                        try {
-                            withdrawalLimit = savingsResultSet.getDouble("WithdrawalLimit");
-                        } catch (Exception e) {
-                            try {
-                                withdrawalLimit = savingsResultSet.getDouble("WithdrawLimit");
-                            } catch (Exception e2) {
-                                withdrawalLimit = 1000.0; // Default
-                            }
-                        }
-                        savingsAccount = new SavingsAccount(payeeAddress, accountNumber, balance, withdrawalLimit);
+                        savingsAccount = new SavingsAccount(payeeAddress, accountNumber, balance);
                     }
 
                     // Create client object
@@ -615,24 +589,64 @@ public class Model {
         return LastSearchErrorMessage != null ? LastSearchErrorMessage : "";
 
     }
+    /**
+     * Search for a client and return full details with accounts
+     */
     public List<Client> getserachedClient(String address) {
         List<Client> clients = new ArrayList<>();
 
-        if(!databaseDriver.checkPayeeAddressExists(address)) { 
-            return clients; 
+        if(!databaseDriver.checkPayeeAddressExists(address)) {
+            return clients;
         }
 
         ResultSet clientResultSet = databaseDriver.getSearchedClient(address);
         try {
             while(clientResultSet != null && clientResultSet.next()) {
-                // Map your ResultSet to Client object
                 String fName = clientResultSet.getString("FirstName");
                 String lName = clientResultSet.getString("LastName");
                 String payeeAddress = clientResultSet.getString("PayeeAddress");
-                Account CheckingAccount = null;
-                Account SavingsAccount = null;
-                LocalDate DateCreated = null;
-                Client client = new Client(fName, lName, payeeAddress,CheckingAccount,SavingsAccount,DateCreated);
+
+                // Parse date
+                String dateString = clientResultSet.getString("Date");
+                LocalDate dateCreated = null;
+                if (dateString != null && !dateString.isEmpty()) {
+                    try {
+                        String[] dateParts = dateString.split("-");
+                        if (dateParts.length == 3) {
+                            dateCreated = LocalDate.of(
+                                    Integer.parseInt(dateParts[0]),
+                                    Integer.parseInt(dateParts[1]),
+                                    Integer.parseInt(dateParts[2])
+                            );
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        dateCreated = LocalDate.now();
+                    }
+                } else {
+                    dateCreated = LocalDate.now();
+                }
+
+                // Get checking account
+                CheckingAccount checkingAccount = null;
+                ResultSet checkingResultSet = databaseDriver.getCheckingAccount(payeeAddress);
+                if (checkingResultSet != null && checkingResultSet.next()) {
+                    String accountNumber = checkingResultSet.getString("AccountNumber");
+                    double balance = checkingResultSet.getDouble("Balance");
+                    int transactionLimit = checkingResultSet.getInt("TransactionLimit");
+                    checkingAccount = new CheckingAccount(payeeAddress, accountNumber, balance, transactionLimit);
+                }
+
+                // Get savings account
+                SavingsAccount savingsAccount = null;
+                ResultSet savingsResultSet = databaseDriver.getSavingsAccount(payeeAddress);
+                if (savingsResultSet != null && savingsResultSet.next()) {
+                    String accountNumber = savingsResultSet.getString("AccountNumber");
+                    double balance = savingsResultSet.getDouble("Balance");
+                    savingsAccount = new SavingsAccount(payeeAddress, accountNumber, balance);
+                }
+
+                Client client = new Client(fName, lName, payeeAddress, checkingAccount, savingsAccount, dateCreated);
                 clients.add(client);
             }
         } catch (SQLException e) {
@@ -641,14 +655,35 @@ public class Model {
 
         return clients;
     }
-    //Deposit
-    public boolean DepositAmount(Double Amount,String payeeAddress) {
-        if (Amount != null) {
-            if (!databaseDriver.depositToCheckingAccount(payeeAddress, Amount)) {
-                return false;
-            }
+
+    /**
+     * Deposit amount to checking account
+     * Fixed to properly validate input and return correct status
+     */
+    public boolean DepositAmount(Double Amount, String payeeAddress) {
+        // Validate inputs
+        if (Amount == null || Amount <= 0) {
+            lastErrorMessage = "Invalid deposit amount";
+            return false;
         }
 
-      return true;
+        if (payeeAddress == null || payeeAddress.isEmpty()) {
+            lastErrorMessage = "Payee address is empty";
+            return false;
+        }
+
+        // Check if account exists
+        if (!databaseDriver.checkPayeeAddressExists(payeeAddress)) {
+            lastErrorMessage = "Client not found";
+            return false;
+        }
+
+        // Perform deposit
+        if (!databaseDriver.depositToCheckingAccount(payeeAddress, Amount)) {
+            lastErrorMessage = "Failed to deposit amount";
+            return false;
+        }
+
+        return true;
     }
 }

@@ -11,8 +11,8 @@ public class Client {
     private final StringProperty FirstName;
     private final StringProperty LastName;
     private final StringProperty PayeeAddress;
-    private final ObjectProperty<Account> CheckingAccount;
-    private final ObjectProperty<Account> SavingsAccount;
+    public final ObjectProperty<Account> CheckingAccount;
+    public final ObjectProperty<Account> SavingsAccount;
     private final ObjectProperty<LocalDate> DateCreated;
 
     public Client(String FirstName, String LastName, String PayeeAddress, Account CheckingAccount, Account SavingsAccount, LocalDate DateCreated) {

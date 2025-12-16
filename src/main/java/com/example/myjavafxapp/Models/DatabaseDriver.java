@@ -190,7 +190,8 @@ public class DatabaseDriver {
      */
     public ResultSet getCheckingAccount(String payeeAddress) {
         String query = "SELECT * FROM CheckingAccounts WHERE Owner = ?";
-        try (PreparedStatement statement = this.connection.prepareStatement(query)) {
+        try {
+            PreparedStatement statement = this.connection.prepareStatement(query);
             statement.setString(1, payeeAddress);
             return statement.executeQuery();
         } catch (SQLException e) {
@@ -207,7 +208,8 @@ public class DatabaseDriver {
     public ResultSet getSavingsAccount(String payeeAddress) {
         // Try both possible column names (WithdrawalLimit vs WithdrawLimit)
         String query = "SELECT * FROM SavingsAccounts WHERE Owner = ?";
-        try (PreparedStatement statement = this.connection.prepareStatement(query)) {
+        try {
+            PreparedStatement statement = this.connection.prepareStatement(query);
             statement.setString(1, payeeAddress);
             return statement.executeQuery();
         } catch (SQLException e) {
