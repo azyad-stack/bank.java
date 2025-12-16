@@ -48,14 +48,16 @@ public class TransactionsCellController implements Initializable {
             amount_trans_lbl.setText(String.format("%.2f MAD", transaction.amountProperty().get()));
 
             // Show appropriate arrow based on transaction direction
-            if (isSender) {
-                // User sent money - show right arrow (outgoing)
-                left_arrow_trans_icon.setVisible(false);
-                right_arrow_trans_icon.setVisible(true);
-            } else {
-                // User received money - show left arrow (incoming)
-                left_arrow_trans_icon.setVisible(true);
-                right_arrow_trans_icon.setVisible(false);
+            if (left_arrow_trans_icon != null && right_arrow_trans_icon != null) {
+                if (isSender) {
+                    // User sent money - show right arrow (outgoing)
+                    left_arrow_trans_icon.setVisible(false);
+                    right_arrow_trans_icon.setVisible(true);
+                } else {
+                    // User received money - show left arrow (incoming)
+                    left_arrow_trans_icon.setVisible(true);
+                    right_arrow_trans_icon.setVisible(false);
+                }
             }
         }
     }

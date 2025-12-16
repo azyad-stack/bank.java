@@ -3,6 +3,7 @@ package com.example.myjavafxapp.Views;
 import com.example.myjavafxapp.Controllers.Admin.AdminController;
 import com.example.myjavafxapp.Controllers.Admin.ClientsController;
 import com.example.myjavafxapp.Controllers.User.DashboardController;
+import com.example.myjavafxapp.Controllers.User.TransactionsController;
 import com.example.myjavafxapp.Controllers.User.UserController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -20,6 +21,7 @@ public class ViewFactory {
     private AnchorPane transactionView;
     private AnchorPane accountsView;
     private DashboardController dashboardController;
+    private TransactionsController transactionsController;
 
     // Admin Views
     private final ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
@@ -69,12 +71,17 @@ public class ViewFactory {
     public AnchorPane getTransactionsView() {
         if(transactionView == null) {
             try {
-                transactionView = new FXMLLoader(getClass().getResource("/Fxml/User/Transactions.fxml")).load();
-
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/User/Transactions.fxml"));
+                transactionView = loader.load();
+                transactionsController = loader.getController();
             }catch (Exception e){
                 e.printStackTrace();
             }
-
+        } else {
+            // Refresh transactions when view is accessed
+            if (transactionsController != null) {
+                transactionsController.refreshTransactions();
+            }
         }
         return transactionView;
     }
