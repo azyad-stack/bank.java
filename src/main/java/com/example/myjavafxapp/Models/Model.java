@@ -20,7 +20,9 @@ public class Model {
     private final Client client;
     private boolean clientLoginSuccessFlag;
     private String lastErrorMessage;
+    //admin data section
     private boolean adminLoginSuccessFlag;
+    private String LastSearchErrorMessage;
 
 
     private Model() {
@@ -595,4 +597,48 @@ public class Model {
         }
     }
 
+
+    public boolean SearchClient(String address) {
+        LastSearchErrorMessage = "";
+        if (address == null || address.isEmpty()) {
+            LastSearchErrorMessage = "Payee Address is Empty :(";
+            return false;
+        }
+        if (databaseDriver.checkPayeeAddressExists(address)) {
+            return true;
+        }
+        return false;
+    }
+
+    public String getLastErrorMessageSearch() {
+
+        return LastSearchErrorMessage != null ? LastSearchErrorMessage : "";
+
+    }
+    public List<Client> getserachedClient(String address) {
+        List<Client> clients = new ArrayList<>();
+
+        if(!databaseDriver.checkPayeeAddressExists(address)) { 
+            return clients; 
+        }
+
+        ResultSet clientResultSet = databaseDriver.getSearchedClient(address);
+        try {
+            while(clientResultSet != null && clientResultSet.next()) {
+                // Map your ResultSet to Client object
+                String fName = clientResultSet.getString("FirstName");
+                String lName = clientResultSet.getString("LastName");
+                String payeeAddress = clientResultSet.getString("PayeeAddress");
+                Account CheckingAccount = null;
+                Account SavingsAccount = null;
+                LocalDate DateCreated = null;
+                Client client = new Client(fName, lName, payeeAddress,CheckingAccount,SavingsAccount,DateCreated);
+                clients.add(client);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return clients;
+    }
 }

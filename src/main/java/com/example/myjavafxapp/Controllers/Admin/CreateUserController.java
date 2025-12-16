@@ -98,7 +98,7 @@ public class CreateUserController  implements Initializable {
 
         if (!firstName.isEmpty() && !lastName.isEmpty()) {
             // Generate PayeeAddress: FirstName.LastName@bank.com
-            String payeeAddress = firstName + "." + lastName + "@bank.com";
+            String payeeAddress = firstName + "." + lastName + "@GadzArtBank.com";
             pAddress_lbl.setText(payeeAddress);
         } else {
             pAddress_lbl.setText("");
@@ -221,6 +221,7 @@ public class CreateUserController  implements Initializable {
                     e.printStackTrace();
                 }
             }).start();
+
         } else {
             // Failure - show error message
             String errorMessage = Model.getInstance().getLastErrorMessage();

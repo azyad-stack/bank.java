@@ -308,4 +308,16 @@ public class DatabaseDriver {
         }
         return resultSet;
     }
+   //To search for client
+   public ResultSet getSearchedClient(String PayeeAddress) {
+       String query = "SELECT * FROM Clients WHERE PayeeAddress = ?";  // Changed to SELECT *
+       try {
+           PreparedStatement preparedStatement = this.connection.prepareStatement(query);  // Use PreparedStatement
+           preparedStatement.setString(1, PayeeAddress);  // Bind parameter
+           return preparedStatement.executeQuery();
+       } catch (SQLException e) {
+           e.printStackTrace();
+           return null;
+       }
+   }
 }
