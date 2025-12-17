@@ -686,4 +686,6 @@ public class Model {
 
         return true;
     }
+    // TRANSACTION SECTION
+
 }

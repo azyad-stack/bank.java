@@ -12,6 +12,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class ViewFactory {
     private AccountType loginAccountType;
     //Client Views
@@ -159,6 +161,7 @@ public class ViewFactory {
     public void showLoginWindow() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
         createStage(loader,"GADZ'Art Bank");
+
     }
     private void createStage(FXMLLoader loader, String title) {
         Scene scene;

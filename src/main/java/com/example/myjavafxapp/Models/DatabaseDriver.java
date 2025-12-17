@@ -136,8 +136,8 @@ public class DatabaseDriver {
         try (PreparedStatement statement = this.connection.prepareStatement(query)) {
             statement.setString(1, owner);
             statement.setString(2, accountNumber);
-            statement.setDouble(3, balance);
-            statement.setInt(4, transactionLimit);
+            statement.setDouble(4, balance);
+            statement.setInt(3, transactionLimit);
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {

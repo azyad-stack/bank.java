@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<AnchorPane prefHeight="60.0" prefWidth="550.0" styleClass="cell_container" stylesheets="@../../styles/TransactionsCell.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="60.0" prefWidth="550.0" styleClass="cell_container" stylesheets="@../../styles/TransactionsCell.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox layoutY="-54.0" prefHeight="50.0" prefWidth="80.0" styleClass="trans_icon_container" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
-            <FontAwesomeIconView fill="#fffdfd" glyphName="EXCHANGE" size="20" />
+            <FontAwesomeIconView fill="#fffdfd" glyphName="EXCHANGE" size="20" text="" />
          </children>
       </VBox>
       <Label fx:id="date_trans_lbl" layoutX="90.0" layoutY="22.0" styleClass="rans_date_lbl" text="2025-12-4" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="22.0" />
