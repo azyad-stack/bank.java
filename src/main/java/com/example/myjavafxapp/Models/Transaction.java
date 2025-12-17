@@ -25,14 +25,8 @@ public class Transaction {
     public StringProperty receiverProperty() {
         return this.receiver;
     }
-    public DoubleProperty amountProperty() {
-        return this.amount;
-    }
-    public ObjectProperty<LocalDate> dateProperty() {
-        return this.date;
-    }
-    public StringProperty messageProperty() {
-        return this.message;
-    }
+    public DoubleProperty amountProperty() {return this.amount;}
+    public ObjectProperty<LocalDate> dateProperty() {return this.date;}
+    public StringProperty messageProperty() {return this.message;}
 
 }
