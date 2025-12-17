@@ -4,12 +4,14 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import static java.sql.DriverManager.getConnection;
+
 public class DatabaseDriver {
     private Connection connection;
 
     public DatabaseDriver(){
         try{
-            this.connection = DriverManager.getConnection("jdbc:sqlite:bank.java.db");
+            this.connection = getConnection("jdbc:sqlite:bank.java.db");
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -19,15 +21,16 @@ public class DatabaseDriver {
      */
 
     public ResultSet getClientData(String pAddress, String password){
-        Statement statement;
-        ResultSet resultSet = null;
-        try{
-            statement = this.connection.createStatement();
-            resultSet = statement.executeQuery("SELECT * FROM Clients WHERE PayeeAddress = '" + pAddress + "' AND Password = '" + password + "';");
-        }catch (SQLException e){
+        String query = "SELECT * FROM Clients WHERE PayeeAddress = ? AND Password = ?";
+        try {
+            PreparedStatement statement = this.connection.prepareStatement(query);
+            statement.setString(1, pAddress);
+            statement.setString(2, password);
+            return statement.executeQuery();
+        } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
-        return resultSet;
     }
 
     /**
@@ -169,6 +172,22 @@ public class DatabaseDriver {
     }
 
     /**
+     * Create client and accounts within a transaction
+     * This ensures atomicity - if any step fails, everything is rolled back
+     * @param firstName First name
+     * @param lastName Last name
+     * @param payeeAddress Payee address
+     * @param password Password (hashed)
+     * @param dateCreated Date created
+     * @param checkingBalance Checking account balance (null if not creating)
+     * @param savingsBalance Savings account balance (null if not creating)
+     * @return true if successful, false otherwise
+     */
+
+
+
+
+    /**
      * Get all clients from the database
      * @return ResultSet containing all clients
      */
@@ -274,10 +293,12 @@ public class DatabaseDriver {
      * Get all transactions for a client (both sent and received)
      * @param payeeAddress The PayeeAddress of the client
      * @return ResultSet containing all transactions
+     * Note: Statement stays open until ResultSet is closed by caller
      */
     public ResultSet getClientTransactions(String payeeAddress) {
         String query = "SELECT * FROM Transactions WHERE Sender = ? OR Receiver = ? ORDER BY Date DESC LIMIT 10";
-        try (PreparedStatement statement = this.connection.prepareStatement(query)) {
+        try {
+            PreparedStatement statement = this.connection.prepareStatement(query);
             statement.setString(1, payeeAddress);
             statement.setString(2, payeeAddress);
             return statement.executeQuery();
@@ -330,4 +351,113 @@ public class DatabaseDriver {
            return false;
        }
    }
+    /**
+     * Create a transaction and update account balances atomically
+     * @param sender PayeeAddress of the sender
+     * @param receiver PayeeAddress of the receiver
+     * @param amount Amount to transfer
+     * @param message Optional message for the transaction
+     * @param date Date of the transaction
+     * @return true if successful, false otherwise
+     */
+    public boolean createTransaction(String sender, String receiver, double amount, String message, LocalDate date) {
+        // Use transaction to ensure atomicity
+        try {
+            connection.setAutoCommit(false);
+
+            // 1. Verify sender has checking account with sufficient balance
+            String checkBalanceQuery = "SELECT Balance FROM CheckingAccounts WHERE Owner = ?";
+            try (PreparedStatement checkStmt = connection.prepareStatement(checkBalanceQuery)) {
+                checkStmt.setString(1, sender);
+                ResultSet balanceResult = checkStmt.executeQuery();
+
+                if (!balanceResult.next()) {
+                    connection.rollback();
+                    connection.setAutoCommit(true);
+                    return false; // Sender has no checking account
+                }
+
+                double currentBalance = balanceResult.getDouble("Balance");
+                if (currentBalance < amount) {
+                    connection.rollback();
+                    connection.setAutoCommit(true);
+                    return false; // Insufficient funds
+                }
+            }
+
+            // 2. Deduct amount from sender's checking account
+            String deductQuery = "UPDATE CheckingAccounts SET Balance = Balance - ? WHERE Owner = ?";
+            try (PreparedStatement deductStmt = connection.prepareStatement(deductQuery)) {
+                deductStmt.setDouble(1, amount);
+                deductStmt.setString(2, sender);
+                int rowsAffected = deductStmt.executeUpdate();
+                if (rowsAffected == 0) {
+                    connection.rollback();
+                    connection.setAutoCommit(true);
+                    return false; // Failed to deduct
+                }
+            }
+
+            // 3. Add amount to receiver's checking account (if exists)
+            String addQuery = "UPDATE CheckingAccounts SET Balance = Balance + ? WHERE Owner = ?";
+            try (PreparedStatement addStmt = connection.prepareStatement(addQuery)) {
+                addStmt.setDouble(1, amount);
+                addStmt.setString(2, receiver);
+                addStmt.executeUpdate(); // Don't fail if receiver has no account
+            }
+
+            // 4. Record transaction in Transactions table
+            String transactionQuery = "INSERT INTO Transactions (Sender, Receiver, Amount, Message, Date) VALUES (?, ?, ?, ?, ?)";
+            try (PreparedStatement transStmt = connection.prepareStatement(transactionQuery)) {
+                transStmt.setString(1, sender);
+                transStmt.setString(2, receiver);
+                transStmt.setDouble(3, amount);
+                transStmt.setString(4, message != null ? message : "");
+                transStmt.setString(5, date.format(DateTimeFormatter.ISO_DATE));
+                transStmt.executeUpdate();
+            }
+
+            // Commit transaction
+            connection.commit();
+            connection.setAutoCommit(true);
+            return true;
+
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+                connection.setAutoCommit(true);
+            } catch (SQLException rollbackEx) {
+                e.printStackTrace();
+            }
+            e.printStackTrace();
+            return false;
+        }
+    }
+    /**
+     * Begin a database transaction (set autocommit to false)
+     */
+    public void beginTransaction() throws SQLException {
+        this.connection.setAutoCommit(false);
+    }
+    
+
+    /**
+     * Commit the current transaction
+     */
+    public void commitTransaction() throws SQLException {
+        this.connection.commit();
+        this.connection.setAutoCommit(true);
+    }
+
+    /**
+     * Rollback the current transaction
+     */
+    public void rollbackTransaction() {
+        try {
+            this.connection.rollback();
+            this.connection.setAutoCommit(true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -313,34 +313,51 @@ public class Model {
         LocalDate currentDate = LocalDate.now();
 
         // Create client
-        if (!databaseDriver.createClient(firstName, lastName, payeeAddress, password, currentDate)) {
-            lastErrorMessage = "Failed to create client. Database error occurred.";
+        try {
+            // Begin transaction
+            databaseDriver.beginTransaction();
+
+
+            // Create client
+            if (!databaseDriver.createClient(firstName, lastName, payeeAddress, password, currentDate)) {
+                databaseDriver.rollbackTransaction();
+                lastErrorMessage = "Failed to create client. Database error occurred.";
+                return false;
+            }
+
+            // Create checking account if requested
+            if (checkingBalance != null) {
+                String checkingAccountNumber = databaseDriver.generateAccountNumber("CHK");
+                int defaultTransactionLimit = 10;
+                if (!databaseDriver.createCheckingAccount(payeeAddress, checkingAccountNumber,
+                        checkingBalance, defaultTransactionLimit)) {
+                    databaseDriver.rollbackTransaction();
+                    lastErrorMessage = "Failed to create checking account.";
+                    return false;
+                }
+            }
+
+            // Create savings account if requested
+            if (savingsBalance != null) {
+                String savingsAccountNumber = databaseDriver.generateAccountNumber("SAV");
+                if (!databaseDriver.createSavingsAccount(payeeAddress, savingsAccountNumber,
+                        savingsBalance)) {
+                    databaseDriver.rollbackTransaction();
+                    lastErrorMessage = "Failed to create savings account.";
+                    return false;
+                }
+            }
+
+            // All successful, commit transaction
+            databaseDriver.commitTransaction();
+            return true;
+
+        } catch (SQLException e) {
+            databaseDriver.rollbackTransaction();
+            lastErrorMessage = "Database error occurred during client creation.";
+            e.printStackTrace();
             return false;
         }
-
-        // Create checking account if requested
-        if (checkingBalance != null) {
-            String checkingAccountNumber = databaseDriver.generateAccountNumber("CHK");
-            int defaultTransactionLimit = 10; // Default transaction limit
-            if (!databaseDriver.createCheckingAccount(payeeAddress, checkingAccountNumber,
-                    checkingBalance, defaultTransactionLimit)) {
-                lastErrorMessage = "Client created but failed to create checking account.";
-                return false;
-            }
-        }
-
-        // Create savings account if requested
-        if (savingsBalance != null) {
-            String savingsAccountNumber = databaseDriver.generateAccountNumber("SAV");
-            double defaultWithdrawalLimit = 1000.0; // Default withdrawal limit
-            if (!databaseDriver.createSavingsAccount(payeeAddress, savingsAccountNumber,
-                    savingsBalance)) {
-                lastErrorMessage = "Client created but failed to create savings account.";
-                return false;
-            }
-        }
-
-        return true;
     }
 
     /**
@@ -457,9 +474,9 @@ public class Model {
             return transactions;
         }
 
-        ResultSet resultSet = databaseDriver.getClientTransactions(payeeAddress);
-
+        ResultSet resultSet = null;
         try {
+            resultSet = databaseDriver.getClientTransactions(payeeAddress);
             if (resultSet != null) {
                 while (resultSet.next()) {
                     String sender = resultSet.getString("Sender");
@@ -494,8 +511,17 @@ public class Model {
                     transactions.add(transaction);
                 }
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            // Close ResultSet to free resources
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         return transactions;
@@ -686,6 +712,69 @@ public class Model {
 
         return true;
     }
-    // TRANSACTION SECTION
+    /**
+     * Send money from logged-in client to another client
+     * @param receiverPayeeAddress PayeeAddress of the receiver
+     * @param amount Amount to send
+     * @param message Optional message
+     * @return true if successful, false otherwise
+     */
+    public boolean sendMoney(String receiverPayeeAddress, double amount, String message) {
+        lastErrorMessage = "";
 
+        String senderPayeeAddress = client.PayeeAddressProperty().get();
+        if (senderPayeeAddress == null || senderPayeeAddress.isEmpty()) {
+            lastErrorMessage = "You must be logged in to send money";
+            return false;
+        }
+
+        // Validate receiver
+        if (receiverPayeeAddress == null || receiverPayeeAddress.trim().isEmpty()) {
+            lastErrorMessage = "Receiver Payee Address cannot be empty";
+            return false;
+        }
+
+        // Can't send to yourself
+        if (receiverPayeeAddress.equals(senderPayeeAddress)) {
+            lastErrorMessage = "You cannot send money to yourself";
+            return false;
+        }
+
+        // Validate receiver exists
+        if (!databaseDriver.checkPayeeAddressExists(receiverPayeeAddress)) {
+            lastErrorMessage = "Receiver Payee Address does not exist";
+            return false;
+        }
+
+        // Validate amount
+        if (amount <= 0) {
+            lastErrorMessage = "Amount must be greater than 0";
+            return false;
+        }
+
+        // Check sender has checking account
+        Account checkingAccount = client.CheckingAccountProperty().get();
+        if (checkingAccount == null) {
+            lastErrorMessage = "You do not have a checking account";
+            return false;
+        }
+
+        // Check sufficient balance
+        double currentBalance = checkingAccount.BalanceProperty().get();
+        if (currentBalance < amount) {
+            lastErrorMessage = "Insufficient funds. Current balance: " + String.format("%.2f", currentBalance) + " MAD";
+            return false;
+        }
+
+        // Create transaction
+        LocalDate transactionDate = LocalDate.now();
+        if (databaseDriver.createTransaction(senderPayeeAddress, receiverPayeeAddress, amount, message, transactionDate)) {
+            // Refresh client accounts to show updated balance
+            refreshClientAccounts();
+            return true;
+        } else {
+            lastErrorMessage = "Failed to process transaction. Please try again.";
+            return false;
+        }
+    }
 }

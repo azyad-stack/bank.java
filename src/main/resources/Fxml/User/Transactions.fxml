@@ -10,7 +10,7 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.myjavafxapp.Controllers.User.TransactionsController">
     <ListView fx:id="Transactions_listview" layoutX="325.0" layoutY="266.0" prefHeight="640.0" prefWidth="830.0"
-              AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="100.0"/>
+              AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="100.0" styleClass="Transactions_listview"/>
     <Text layoutX="349.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transactions"
           AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="14.0"/>
 </AnchorPane>

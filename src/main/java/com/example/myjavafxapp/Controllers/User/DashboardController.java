@@ -14,7 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-
+import javafx.scene.control.Alert;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -40,6 +40,11 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadDashboardData();
+        setupSendMoneyHandler();
+    }
+
+    private void setupSendMoneyHandler() {
+        send_money_btn.setOnAction(event -> onSendMoney());
     }
 
     /**
@@ -128,5 +133,54 @@ public class DashboardController implements Initializable {
 
         // Set items in ListView
         transaction_listview.setItems(transactionsObservableList);
+    }
+    private void onSendMoney() {
+        // Get input values
+        String receiverPayeeAddress = payee_field.getText().trim();
+        String amountText = amount_field.getText().trim();
+        String message = message_field.getText().trim();
+
+        // Validate receiver
+        if (receiverPayeeAddress.isEmpty()) {
+            showError("Please enter receiver Payee Address");
+            return;
+        }
+
+        // Validate and parse amount
+        double amount;
+        try {
+            amount = Double.parseDouble(amountText);
+            if (amount <= 0) {
+                showError("Amount must be greater than 0");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            showError("Please enter a valid amount");
+            return;
+        }
+
+        // Attempt to send money
+        if (Model.getInstance().sendMoney(receiverPayeeAddress, amount, message)) {
+            // Success - clear fields and refresh data
+            payee_field.clear();
+            amount_field.clear();
+            message_field.clear();
+            loadDashboardData(); // Refresh to show new balance and transaction
+        } else {
+            // Show error message
+            String errorMsg = Model.getInstance().getLastErrorMessage();
+            showError(errorMsg.isEmpty() ? "Failed to send money. Please try again." : errorMsg);
+        }
+    }
+
+    /**
+     * Show error message (you can replace this with a proper Alert dialog)
+     */
+    private void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Transaction Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
