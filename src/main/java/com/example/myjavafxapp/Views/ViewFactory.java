@@ -30,6 +30,7 @@ public class ViewFactory {
     private AnchorPane createUserView;
     private AnchorPane clientsView;
     private AnchorPane depositsView;
+    private AnchorPane resetPasswordView;
     private ClientsController clientsController;
 
     public ViewFactory() {
@@ -169,6 +170,16 @@ public class ViewFactory {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
         createStage(loader,"GADZ'Art Bank");
 
+    }
+    public AnchorPane getResetPasswordView() {
+        if(resetPasswordView == null) {
+            try {
+                resetPasswordView = new FXMLLoader(getClass().getResource("/Fxml/Admin/ResetPassword.fxml")).load();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return resetPasswordView;
     }
     private void createStage(FXMLLoader loader, String title) {
         Scene scene;

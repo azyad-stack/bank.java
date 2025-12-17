@@ -17,6 +17,53 @@
 }
 
 /* ---------------------------------------------------
+   FILTER SECTION
+---------------------------------------------------- */
+.filter-label {
+    -fx-text-fill: #cbd5e1;
+    -fx-font-size: 1em;
+    -fx-font-weight: 600;
+}
+
+.date-picker {
+    -fx-background-color: rgba(30, 41, 59, 0.8);
+    -fx-background-radius: 8;
+    -fx-border-color: rgba(148, 163, 184, 0.35);
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+}
+
+.date-picker .text-field {
+    -fx-text-fill: #f1f5f9;
+    -fx-background-color: transparent;
+}
+
+.search-btn, .reset-btn {
+    -fx-background-color: #2563eb;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-font-size: 0.95em;
+    -fx-font-weight: 600;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.search-btn:hover, .reset-btn:hover {
+    -fx-background-color: #1d4ed8;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.reset-btn {
+    -fx-background-color: #64748b;
+}
+
+.reset-btn:hover {
+    -fx-background-color: #475569;
+}
+
+/* ---------------------------------------------------
    TRANSACTIONS LISTVIEW
 ---------------------------------------------------- */
 .transactions_container .list-view {
@@ -74,4 +121,54 @@
 
 .transactions_container .list-cell:focused {
     -fx-background-color: rgba(6, 182, 212, 0.20);
+}
+
+/* ---------------------------------------------------
+   PAGINATION CONTROLS
+---------------------------------------------------- */
+.page-btn {
+    -fx-background-color: rgba(30, 41, 59, 0.8);
+    -fx-text-fill: #e2e8f0;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: rgba(148, 163, 184, 0.35);
+    -fx-border-width: 1;
+    -fx-font-size: 0.95em;
+    -fx-font-weight: 600;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.page-btn:hover {
+    -fx-background-color: #2563eb;
+    -fx-border-color: #3b82f6;
+}
+
+.page-btn:disabled {
+    -fx-opacity: 0.4;
+    -fx-cursor: default;
+}
+
+.page-info {
+    -fx-text-fill: #cbd5e1;
+    -fx-font-size: 1.1em;
+    -fx-font-weight: 600;
+    -fx-padding: 0 20;
+}
+
+.page-size-label {
+    -fx-text-fill: #cbd5e1;
+    -fx-font-size: 0.95em;
+    -fx-padding: 0 10;
+}
+
+.page-size-combo {
+    -fx-background-color: rgba(30, 41, 59, 0.8);
+    -fx-background-radius: 8;
+    -fx-border-color: rgba(148, 163, 184, 0.35);
+    -fx-border-radius: 8;
+}
+
+.page-size-combo .list-cell {
+    -fx-text-fill: #f1f5f9;
 }
