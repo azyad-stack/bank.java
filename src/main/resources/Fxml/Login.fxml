@@ -3,20 +3,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="login_container" stylesheets="@../styles/login.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafxapp.Controllers.LoginController">
-    <VBox layoutX="-8.0" prefHeight="400.0" prefWidth="211.0" styleClass="login_logo_container" stylesheets="@../styles/login.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-8.0" AnchorPane.topAnchor="0.0">
-        <ImageView fitHeight="213.0" fitWidth="194.0" preserveRatio="true">
-            <image>
-                <Image url="@../images/LOGO (2).png" />
-            </image>
+    <VBox layoutX="-8.0" prefHeight="200.0" prefWidth="200.0" styleClass="login_logo_container" stylesheets="@../styles/login.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-8.0" AnchorPane.topAnchor="0.0">
+        <ImageView fitHeight="300.0" fitWidth="250" preserveRatio="true">
+            <Image url="@../images/LOGO2.png" />
         </ImageView>
-        <Text fill="#d9d0d0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gadzarts Bank">
-            <font>
-                <Font size="39.0" />
-            </font>
-        </Text>
     </VBox>
     <VBox layoutX="264.0" layoutY="5.0" prefHeight="400.0" prefWidth="330.0" styleClass="login_form_container" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="5.0">
         <Label id="choice-prompt-text" text="Choose Your Account Type" />

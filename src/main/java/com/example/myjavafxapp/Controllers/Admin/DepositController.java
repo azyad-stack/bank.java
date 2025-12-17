@@ -29,11 +29,6 @@ public class DepositController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         addListeners();
-        loadSearchedClient();
-    }
-
-    private void loadSearchedClient() {
-
     }
 
     private void addListeners() {

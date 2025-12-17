@@ -182,6 +182,7 @@ public class ViewFactory {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Gadz'Art Bank");
+
         stage.show();
     }
 

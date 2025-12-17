@@ -23,8 +23,8 @@
 
 /* Style for the ImageView logo */
 .login_logo_container ImageView {
-    -fx-fit-height: 120;
-    -fx-fit-width: 130;
+    -fx-fit-height: 200;
+    -fx-fit-width: 200;
 }
 
 .login_logo_container Text {

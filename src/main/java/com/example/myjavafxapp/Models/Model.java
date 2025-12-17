@@ -96,16 +96,6 @@ public class Model {
             if (savingsResultSet != null && savingsResultSet.next()) {
                 String accountNumber = savingsResultSet.getString("AccountNumber");
                 double balance = savingsResultSet.getDouble("Balance");
-                double withdrawalLimit;
-                try {
-                    withdrawalLimit = savingsResultSet.getDouble("WithdrawalLimit");
-                } catch (Exception e) {
-                    try {
-                        withdrawalLimit = savingsResultSet.getDouble("WithdrawLimit");
-                    } catch (Exception e2) {
-                        withdrawalLimit = 1000.0; // Default fallback
-                    }
-                }
                 savingsAccount = new SavingsAccount(payeeAddress, accountNumber, balance);
             }
         } catch (Exception e) {
