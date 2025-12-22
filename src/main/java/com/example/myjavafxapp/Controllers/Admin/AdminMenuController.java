@@ -18,10 +18,11 @@ public class AdminMenuController implements Initializable {
     public Button deposit_client;
     @FXML
     public Button logout_btn;
+    @FXML
+    public Button reset_password_btn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         addListeners();
     }
 
@@ -31,6 +32,7 @@ public class AdminMenuController implements Initializable {
         clients_btn.setOnAction(event -> onClients());
         logout_btn.setOnAction(event -> onlogout());
         deposit_client.setOnAction(event -> onDeposit());
+        reset_password_btn.setOnAction(event -> onResetPassword());
     }
 
     private void onDeposit() {
@@ -48,4 +50,9 @@ public class AdminMenuController implements Initializable {
     private void onCreateClient(){
         Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.CREATE_CLIENT);
     }
+    private void onResetPassword() {
+        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.RESET_PASSWORD);
+    }
+
+
 }

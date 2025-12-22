@@ -21,9 +21,7 @@ public class ClientsController implements Initializable {
         loadClients();
     }
 
-    /**
-     * Load all clients from the database and display them in the ListView
-     */
+
     public void loadClients() {
         // Get all clients from Model
         List<Client> clients = Model.getInstance().getAllClients();

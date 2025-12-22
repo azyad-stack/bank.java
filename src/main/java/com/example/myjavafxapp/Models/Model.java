@@ -65,8 +65,7 @@ public class Model {
     public Client getClient() {return client;}
 
     /**
-     * Refresh the currently logged-in client's accounts from the database.
-     * Useful when opening dashboard to ensure we show the latest balances.
+     * Refrech when opening dashboard to ensure we show the latest balances.
      */
     public void refreshClientAccounts() {
         String payeeAddress = client.PayeeAddressProperty().get();
@@ -764,6 +763,294 @@ public class Model {
             return true;
         } else {
             lastErrorMessage = "Failed to process transaction. Please try again.";
+            return false;
+        }
+    }
+
+    /**
+     * Get paginated transactions for the logged-in client
+     * @param page Page number (1-based)
+     * @param pageSize Number of transactions per page
+     * @return List of transactions
+     */
+    public List<Transaction> getClientTransactionsPaginated(int page, int pageSize) {
+        List<Transaction> transactions = new ArrayList<>();
+        String payeeAddress = client.PayeeAddressProperty().get();
+
+        if (payeeAddress == null || payeeAddress.isEmpty()) {
+            return transactions;
+        }
+
+        int offset = (page - 1) * pageSize;
+        ResultSet resultSet = null;
+        try {
+            resultSet = databaseDriver.getClientTransactionsPaginated(payeeAddress, offset, pageSize);
+            if (resultSet != null) {
+                while (resultSet.next()) {
+                    String sender = resultSet.getString("Sender");
+                    String receiver = resultSet.getString("Receiver");
+                    double amount = resultSet.getDouble("Amount");
+                    String message = resultSet.getString("Message");
+                    if (message == null) message = "";
+
+                    String dateString = resultSet.getString("Date");
+                    LocalDate date = LocalDate.now();
+                    if (dateString != null && !dateString.isEmpty()) {
+                        try {
+                            String[] dateParts = dateString.split("-");
+                            if (dateParts.length == 3) {
+                                date = LocalDate.of(
+                                        Integer.parseInt(dateParts[0]),
+                                        Integer.parseInt(dateParts[1]),
+                                        Integer.parseInt(dateParts[2])
+                                );
+                            }
+                        } catch (Exception e) {
+                            date = LocalDate.now();
+                        }
+                    }
+
+                    Transaction transaction = new Transaction(sender, receiver, amount, date, message);
+                    transactions.add(transaction);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return transactions;
+    }
+
+    /**
+     * Get total number of pages for transactions
+     * @param pageSize Number of transactions per page
+     * @return Total number of pages
+     */
+    public int getTransactionPageCount(int pageSize) {
+        String payeeAddress = client.PayeeAddressProperty().get();
+        if (payeeAddress == null || payeeAddress.isEmpty()) {
+            return 0;
+        }
+
+        int totalTransactions = databaseDriver.getClientTransactionCount(payeeAddress);
+        return (int) Math.ceil((double) totalTransactions / pageSize);
+    }
+
+    /**
+     * Search transactions by date range
+     * @param startDate Start date
+     * @param endDate End date
+     * @param page Page number (1-based)
+     * @param pageSize Items per page
+     * @return List of filtered transactions
+     */
+    public List<Transaction> searchTransactionsByDate(LocalDate startDate, LocalDate endDate,
+                                                      int page, int pageSize) {
+        List<Transaction> transactions = new ArrayList<>();
+        String payeeAddress = client.PayeeAddressProperty().get();
+
+        if (payeeAddress == null || payeeAddress.isEmpty()) {
+            return transactions;
+        }
+
+        int offset = (page - 1) * pageSize;
+        ResultSet resultSet = null;
+        try {
+            resultSet = databaseDriver.searchTransactionsByDateRange(
+                    payeeAddress, startDate, endDate, offset, pageSize
+            );
+
+            if (resultSet != null) {
+                while (resultSet.next()) {
+                    String sender = resultSet.getString("Sender");
+                    String receiver = resultSet.getString("Receiver");
+                    double amount = resultSet.getDouble("Amount");
+                    String message = resultSet.getString("Message");
+                    if (message == null) message = "";
+
+                    String dateString = resultSet.getString("Date");
+                    LocalDate date = LocalDate.now();
+                    if (dateString != null && !dateString.isEmpty()) {
+                        try {
+                            String[] dateParts = dateString.split("-");
+                            if (dateParts.length == 3) {
+                                date = LocalDate.of(
+                                        Integer.parseInt(dateParts[0]),
+                                        Integer.parseInt(dateParts[1]),
+                                        Integer.parseInt(dateParts[2])
+                                );
+                            }
+                        } catch (Exception e) {
+                            date = LocalDate.now();
+                        }
+                    }
+
+                    Transaction transaction = new Transaction(sender, receiver, amount, date, message);
+                    transactions.add(transaction);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return transactions;
+    }
+    /**
+     * Transfer money from checking to savings account
+     * @param amount Amount to transfer
+     * @return true if successful
+     */
+    public boolean transferToSavings(double amount) {
+        lastErrorMessage = "";
+
+        String payeeAddress = client.PayeeAddressProperty().get();
+        if (payeeAddress == null || payeeAddress.isEmpty()) {
+            lastErrorMessage = "User not logged in";
+            return false;
+        }
+
+        // Validate amount
+        if (amount <= 0) {
+            lastErrorMessage = "Amount must be greater than 0";
+            return false;
+        }
+
+        // Check if user has checking account
+        Account checkingAccount = client.CheckingAccountProperty().get();
+        if (checkingAccount == null) {
+            lastErrorMessage = "You do not have a checking account";
+            return false;
+        }
+
+        // Check if user has savings account
+        Account savingsAccount = client.SavingsAccountProperty().get();
+        if (savingsAccount == null) {
+            lastErrorMessage = "You do not have a savings account";
+            return false;
+        }
+
+        // Check sufficient balance
+        double currentBalance = checkingAccount.BalanceProperty().get();
+        if (currentBalance < amount) {
+            lastErrorMessage = "Insufficient funds in checking account. Current balance: " +
+                    String.format("%.2f", currentBalance) + " MAD";
+            return false;
+        }
+
+        // Perform transfer
+        if (databaseDriver.transferCheckingToSavings(payeeAddress, amount)) {
+            // Refresh accounts
+            refreshClientAccounts();
+            return true;
+        } else {
+            lastErrorMessage = "Failed to process transfer. Please try again.";
+            return false;
+        }
+    }
+
+    /**
+     * Transfer money from savings to checking account
+     * @param amount Amount to transfer
+     * @return true if successful
+     */
+    public boolean transferToChecking(double amount) {
+        lastErrorMessage = "";
+
+        String payeeAddress = client.PayeeAddressProperty().get();
+        if (payeeAddress == null || payeeAddress.isEmpty()) {
+            lastErrorMessage = "User not logged in";
+            return false;
+        }
+
+        // Validate amount
+        if (amount <= 0) {
+            lastErrorMessage = "Amount must be greater than 0";
+            return false;
+        }
+
+        // Check if user has savings account
+        Account savingsAccount = client.SavingsAccountProperty().get();
+        if (savingsAccount == null) {
+            lastErrorMessage = "You do not have a savings account";
+            return false;
+        }
+
+        // Check if user has checking account
+        Account checkingAccount = client.CheckingAccountProperty().get();
+        if (checkingAccount == null) {
+            lastErrorMessage = "You do not have a checking account";
+            return false;
+        }
+
+        // Check sufficient balance
+        double currentBalance = savingsAccount.BalanceProperty().get();
+        if (currentBalance < amount) {
+            lastErrorMessage = "Insufficient funds in savings account. Current balance: " +
+                    String.format("%.2f", currentBalance) + " MAD";
+            return false;
+        }
+
+        // Perform transfer
+        if (databaseDriver.transferSavingsToChecking(payeeAddress, amount)) {
+            // Refresh accounts
+            refreshClientAccounts();
+            return true;
+        } else {
+            lastErrorMessage = "Failed to process transfer. Please try again.";
+            return false;
+        }
+    }
+    /**
+     * Reset user password (Admin function)
+     * @param payeeAddress User's PayeeAddress
+     * @param newPassword New password
+     * @return true if successful
+     */
+    public boolean resetUserPassword(String payeeAddress, String newPassword) {
+        lastErrorMessage = "";
+
+        if (payeeAddress == null || payeeAddress.isEmpty()) {
+            lastErrorMessage = "Payee Address is required";
+            return false;
+        }
+
+        if (newPassword == null || newPassword.isEmpty()) {
+            lastErrorMessage = "Password is required";
+            return false;
+        }
+
+        if (newPassword.length() < 4) {
+            lastErrorMessage = "Password must be at least 4 characters long";
+            return false;
+        }
+
+        // Check if user exists
+        if (!databaseDriver.checkPayeeAddressExists(payeeAddress)) {
+            lastErrorMessage = "User not found";
+            return false;
+        }
+
+        // Reset password
+        if (databaseDriver.resetUserPassword(payeeAddress, newPassword)) {
+            return true;
+        } else {
+            lastErrorMessage = "Failed to reset password. Database error.";
             return false;
         }
     }

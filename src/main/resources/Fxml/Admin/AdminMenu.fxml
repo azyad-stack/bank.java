@@ -2,15 +2,14 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="180.0" styleClass="main_menu_container" stylesheets="@../../styles/AdminMenu.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafxapp.Controllers.Admin.AdminMenuController">
     <AnchorPane prefHeight="730.0" prefWidth="100.0" styleClass="left_container">
         <VBox prefHeight="80.0" prefWidth="160.0" styleClass="title_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="176.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                 <image>
                     <Image url="@../../images/LOGO2.png" />
                 </image>
@@ -31,6 +30,11 @@
             <Button fx:id="deposit_client" mnemonicParsing="false" prefWidth="166.0" text="Deposit">
                 <graphic>
                     <FontAwesomeIconView glyphName="CREDIT_CARD" size="16" />
+                </graphic>
+            </Button>
+            <Button fx:id="reset_password_btn" mnemonicParsing="false" prefWidth="166.0" text="Reset Password">
+                <graphic>
+                    <FontAwesomeIconView glyphName="KEY" size="16" />
                 </graphic>
             </Button>
             <Button fx:id="logout_btn" mnemonicParsing="false" styleClass="alt_menu_btn" text="Logout">

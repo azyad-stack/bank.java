@@ -460,4 +460,254 @@ public class DatabaseDriver {
             e.printStackTrace();
         }
     }
+    /**
+     * Get transactions with pagination
+     * @param payeeAddress The PayeeAddress of the client
+     * @param offset Starting position (0-based)
+     * @param limit Number of transactions to fetch
+     * @return ResultSet containing transactions
+     */
+    public ResultSet getClientTransactionsPaginated(String payeeAddress, int offset, int limit) {
+        String query = "SELECT * FROM Transactions WHERE Sender = ? OR Receiver = ? " +
+                "ORDER BY Date DESC, rowid DESC LIMIT ? OFFSET ?";
+        try {
+            PreparedStatement statement = this.connection.prepareStatement(query);
+            statement.setString(1, payeeAddress);
+            statement.setString(2, payeeAddress);
+            statement.setInt(3, limit);
+            statement.setInt(4, offset);
+            return statement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Get total count of transactions for a client
+     * @param payeeAddress The PayeeAddress of the client
+     * @return Total number of transactions
+     */
+    public int getClientTransactionCount(String payeeAddress) {
+        String query = "SELECT COUNT(*) as total FROM Transactions WHERE Sender = ? OR Receiver = ?";
+        try (PreparedStatement statement = this.connection.prepareStatement(query)) {
+            statement.setString(1, payeeAddress);
+            statement.setString(2, payeeAddress);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    /**
+     * Search transactions by date range
+     * @param payeeAddress Client's PayeeAddress
+     * @param startDate Start date (inclusive)
+     * @param endDate End date (inclusive)
+     * @param offset Starting position
+     * @param limit Number of results
+     * @return ResultSet containing filtered transactions
+     */
+    public ResultSet searchTransactionsByDateRange(String payeeAddress, LocalDate startDate,
+                                                   LocalDate endDate, int offset, int limit) {
+        String query = "SELECT * FROM Transactions WHERE (Sender = ? OR Receiver = ?) " +
+                "AND Date BETWEEN ? AND ? ORDER BY Date DESC LIMIT ? OFFSET ?";
+        try {
+            PreparedStatement statement = this.connection.prepareStatement(query);
+            statement.setString(1, payeeAddress);
+            statement.setString(2, payeeAddress);
+            statement.setString(3, startDate.format(DateTimeFormatter.ISO_DATE));
+            statement.setString(4, endDate.format(DateTimeFormatter.ISO_DATE));
+            statement.setInt(5, limit);
+            statement.setInt(6, offset);
+            return statement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    /**
+     * Transfer funds from checking to savings account
+     * @param payeeAddress Owner's PayeeAddress
+     * @param amount Amount to transfer
+     * @return true if successful
+     */
+    public boolean transferCheckingToSavings(String payeeAddress, double amount) {
+        try {
+            connection.setAutoCommit(false);
+
+            // Check checking account balance
+            String checkBalanceQuery = "SELECT Balance FROM CheckingAccounts WHERE Owner = ?";
+            try (PreparedStatement checkStmt = connection.prepareStatement(checkBalanceQuery)) {
+                checkStmt.setString(1, payeeAddress);
+                ResultSet rs = checkStmt.executeQuery();
+
+                if (!rs.next()) {
+                    connection.rollback();
+                    connection.setAutoCommit(true);
+                    return false;
+                }
+
+                double checkingBalance = rs.getDouble("Balance");
+                if (checkingBalance < amount) {
+                    connection.rollback();
+                    connection.setAutoCommit(true);
+                    return false;
+                }
+            }
+
+            // Deduct from checking
+            String deductQuery = "UPDATE CheckingAccounts SET Balance = Balance - ? WHERE Owner = ?";
+            try (PreparedStatement deductStmt = connection.prepareStatement(deductQuery)) {
+                deductStmt.setDouble(1, amount);
+                deductStmt.setString(2, payeeAddress);
+                if (deductStmt.executeUpdate() == 0) {
+                    connection.rollback();
+                    connection.setAutoCommit(true);
+                    return false;
+                }
+            }
+
+            // Add to savings
+            String addQuery = "UPDATE SavingsAccounts SET Balance = Balance + ? WHERE Owner = ?";
+            try (PreparedStatement addStmt = connection.prepareStatement(addQuery)) {
+                addStmt.setDouble(1, amount);
+                addStmt.setString(2, payeeAddress);
+                if (addStmt.executeUpdate() == 0) {
+                    connection.rollback();
+                    connection.setAutoCommit(true);
+                    return false;
+                }
+            }
+
+            // Record internal transaction
+            String transQuery = "INSERT INTO Transactions (Sender, Receiver, Amount, Message, Date) VALUES (?, ?, ?, ?, ?)";
+            try (PreparedStatement transStmt = connection.prepareStatement(transQuery)) {
+                transStmt.setString(1, payeeAddress + " (Checking)");
+                transStmt.setString(2, payeeAddress + " (Savings)");
+                transStmt.setDouble(3, amount);
+                transStmt.setString(4, "Internal Transfer");
+                transStmt.setString(5, LocalDate.now().format(DateTimeFormatter.ISO_DATE));
+                transStmt.executeUpdate();
+            }
+
+            connection.commit();
+            connection.setAutoCommit(true);
+            return true;
+
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Transfer funds from savings to checking account
+     * @param payeeAddress Owner's PayeeAddress
+     * @param amount Amount to transfer
+     * @return true if successful
+     */
+    public boolean transferSavingsToChecking(String payeeAddress, double amount) {
+        try {
+            connection.setAutoCommit(false);
+
+            // Check savings account balance
+            String checkBalanceQuery = "SELECT Balance FROM SavingsAccounts WHERE Owner = ?";
+            try (PreparedStatement checkStmt = connection.prepareStatement(checkBalanceQuery)) {
+                checkStmt.setString(1, payeeAddress);
+                ResultSet rs = checkStmt.executeQuery();
+
+                if (!rs.next()) {
+                    connection.rollback();
+                    connection.setAutoCommit(true);
+                    return false;
+                }
+
+                double savingsBalance = rs.getDouble("Balance");
+                if (savingsBalance < amount) {
+                    connection.rollback();
+                    connection.setAutoCommit(true);
+                    return false;
+                }
+            }
+
+            // Deduct from savings
+            String deductQuery = "UPDATE SavingsAccounts SET Balance = Balance - ? WHERE Owner = ?";
+            try (PreparedStatement deductStmt = connection.prepareStatement(deductQuery)) {
+                deductStmt.setDouble(1, amount);
+                deductStmt.setString(2, payeeAddress);
+                if (deductStmt.executeUpdate() == 0) {
+                    connection.rollback();
+                    connection.setAutoCommit(true);
+                    return false;
+                }
+            }
+
+            // Add to checking
+            String addQuery = "UPDATE CheckingAccounts SET Balance = Balance + ? WHERE Owner = ?";
+            try (PreparedStatement addStmt = connection.prepareStatement(addQuery)) {
+                addStmt.setDouble(1, amount);
+                addStmt.setString(2, payeeAddress);
+                if (addStmt.executeUpdate() == 0) {
+                    connection.rollback();
+                    connection.setAutoCommit(true);
+                    return false;
+                }
+            }
+
+            // Record internal transaction
+            String transQuery = "INSERT INTO Transactions (Sender, Receiver, Amount, Message, Date) VALUES (?, ?, ?, ?, ?)";
+            try (PreparedStatement transStmt = connection.prepareStatement(transQuery)) {
+                transStmt.setString(1, payeeAddress + " (Savings)");
+                transStmt.setString(2, payeeAddress + " (Checking)");
+                transStmt.setDouble(3, amount);
+                transStmt.setString(4, "Internal Transfer");
+                transStmt.setString(5, LocalDate.now().format(DateTimeFormatter.ISO_DATE));
+                transStmt.executeUpdate();
+            }
+
+            connection.commit();
+            connection.setAutoCommit(true);
+            return true;
+
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+            return false;
+        }
+    }
+    /**
+     * Reset user password (Admin function)
+     * @param payeeAddress User's PayeeAddress
+     * @param newPassword New password
+     * @return true if successful
+     */
+    public boolean resetUserPassword(String payeeAddress, String newPassword) {
+        String query = "UPDATE Clients SET Password = ? WHERE PayeeAddress = ?";
+        try (PreparedStatement statement = this.connection.prepareStatement(query)) {
+            statement.setString(1, newPassword);
+            statement.setString(2, payeeAddress);
+
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

@@ -21,16 +21,15 @@ public class AdminController implements Initializable {
 
         Model.getInstance().getViewFactory().getAdminSelectedMenuItem().addListener((observableValue, oldVal, newVal) -> {
 
-            // Example switch — you will customize this later
             switch (newVal) {
                 case CLIENTS -> admin_parent.setCenter(Model.getInstance().getViewFactory().getClientsView());
                 case DEPOSIT ->  admin_parent.setCenter(Model.getInstance().getViewFactory().getDepositsView());
+                case RESET_PASSWORD -> admin_parent.setCenter(Model.getInstance().getViewFactory().getResetPasswordView());
                 case LOGOUT -> {
                     // Close current admin window
                     Stage stage = (Stage) admin_parent.getScene().getWindow();
                     Model.getInstance().getViewFactory().closeStage(stage);
 
-                    // Show login window
                     Model.getInstance().getViewFactory().showLoginWindow();
                 }
                 default -> admin_parent.setCenter(Model.getInstance().getViewFactory().getCreateUserView());
