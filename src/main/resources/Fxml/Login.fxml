@@ -5,9 +5,17 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="login_container" stylesheets="@../styles/login.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafxapp.Controllers.LoginController">
+<<<<<<< HEAD
     <VBox layoutX="-8.0" prefHeight="200.0" prefWidth="200.0" styleClass="login_logo_container" stylesheets="@../styles/login.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-8.0" AnchorPane.topAnchor="0.0">
         <ImageView fitHeight="300.0" fitWidth="250" preserveRatio="true">
             <Image url="@../images/LOGO2.png" />
+=======
+    <VBox layoutX="-8.0" prefHeight="400.0" prefWidth="211.0" styleClass="login_logo_container" stylesheets="@../styles/login.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-8.0" AnchorPane.topAnchor="0.0">
+        <ImageView fitHeight="350.0" fitWidth="200.0" preserveRatio="true">
+            <image>
+                <Image url="@../images/LOGO (2).png" />
+            </image>
+>>>>>>> 83c001b621b859d19aa8ee7443756da77011de11
         </ImageView>
     </VBox>
     <VBox layoutX="264.0" layoutY="5.0" prefHeight="400.0" prefWidth="330.0" styleClass="login_form_container" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="5.0">
